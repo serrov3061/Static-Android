@@ -1,0 +1,708 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.11.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :buildSrc:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :buildSrc:pluginDescriptors
+> Task :buildSrc:processResources
+
+> Task :buildSrc:compileKotlin
+w: file:///root/staticgram-client/buildSrc/src/main/kotlin/com/example/GenerateSchemeTask.kt:67:13 Variable 'tlSchemaFilter' is never used
+w: file:///root/staticgram-client/buildSrc/src/main/kotlin/com/example/GenerateSchemeTask.kt:76:13 Variable 'totalHistory' is never used
+w: file:///root/staticgram-client/buildSrc/src/main/kotlin/com/example/GenerateSchemeTask.kt:111:13 Variable 'enumTypes' is never used
+w: file:///root/staticgram-client/buildSrc/src/main/kotlin/com/example/GenerateSchemeTask.kt:117:13 Variable 'schemaAllIds' is never used
+w: file:///root/staticgram-client/buildSrc/src/main/kotlin/org/telegram/lottie/LottieMetaTask.kt:50:82 Elvis operator (?:) always returns the left operand of non-nullable type Boolean
+w: file:///root/staticgram-client/buildSrc/src/main/kotlin/org/telegram/tlrpc/SchemeTlValidator.kt:14:36 Parameter 'c' is never used, could be renamed to _
+w: file:///root/staticgram-client/buildSrc/src/main/kotlin/org/telegram/tlrpc/telegram/TelegramCodeParser.kt:48:63 'asInt(): Int' is deprecated. Deprecated in Java
+
+> Task :buildSrc:compileJava NO-SOURCE
+> Task :buildSrc:compileGroovy NO-SOURCE
+> Task :buildSrc:classes
+> Task :buildSrc:jar
+
+> Configure project :jlatexmath
+WARNING: The option setting 'android.defaults.buildfeatures.buildconfig=true' is deprecated.
+The current default is 'false'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+To keep using this feature, add the following to your module-level build.gradle files:
+    android.buildFeatures.buildConfig = true
+or from Android Studio, click: `Refactor` > `Migrate BuildConfig to Gradle Build Files`.
+
+> Configure project :TMessagesProj
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+
+> Configure project :TMessagesProj_AppHuawei
+--W- Build Environment: AGConnect plugin version is: 1.9.1.301, Gradle version is: 8.11.1, Android Plugin version is: 8.10.1
+--I- Using the AGConnect-Config file: /root/staticgram-client/TMessagesProj_AppHuawei/agconnect-services.json
+--W- The variant: afatDebug, Use the json file: /root/staticgram-client/TMessagesProj_AppHuawei/agconnect-services.json
+--I- Using the AGConnect-Config file: /root/staticgram-client/TMessagesProj_AppHuawei/agconnect-services.json
+--W- The variant: afatRelease, Use the json file: /root/staticgram-client/TMessagesProj_AppHuawei/agconnect-services.json
+
+> Task :jlatexmath:preBuild UP-TO-DATE
+> Task :jlatexmath:preReleaseBuild UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:preBuild UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:preAfatStandaloneBuild UP-TO-DATE
+> Task :jlatexmath:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :TMessagesProj:checkVisibility
+> Task :TMessagesProj:preBuild
+> Task :TMessagesProj:preStandaloneBuild
+> Task :jlatexmath:mergeReleaseNativeLibs NO-SOURCE
+> Task :jlatexmath:copyReleaseJniLibsProjectOnly UP-TO-DATE
+> Task :jlatexmath:prepareReleaseArtProfile UP-TO-DATE
+> Task :jlatexmath:generateReleaseBuildConfig UP-TO-DATE
+> Task :jlatexmath:generateReleaseResValues UP-TO-DATE
+> Task :jlatexmath:generateReleaseResources UP-TO-DATE
+> Task :jlatexmath:packageReleaseResources UP-TO-DATE
+> Task :jlatexmath:parseReleaseLocalResources UP-TO-DATE
+> Task :jlatexmath:generateReleaseRFile UP-TO-DATE
+> Task :jlatexmath:javaPreCompileRelease UP-TO-DATE
+> Task :TMessagesProj:configureCMakeRelWithDebInfo[arm64-v8a]
+> Task :jlatexmath:compileReleaseJavaWithJavac UP-TO-DATE
+> Task :jlatexmath:bundleLibCompileToJarRelease UP-TO-DATE
+> Task :jlatexmath:mergeReleaseGeneratedProguardFiles UP-TO-DATE
+> Task :jlatexmath:exportReleaseConsumerProguardFiles UP-TO-DATE
+> Task :jlatexmath:bundleLibRuntimeToJarRelease UP-TO-DATE
+> Task :jlatexmath:processReleaseJavaRes NO-SOURCE
+> Task :jlatexmath:compileReleaseLibraryResources UP-TO-DATE
+> Task :jlatexmath:writeReleaseAarMetadata UP-TO-DATE
+> Task :jlatexmath:extractDeepLinksRelease UP-TO-DATE
+> Task :jlatexmath:processReleaseManifest UP-TO-DATE
+> Task :jlatexmath:mergeReleaseShaders UP-TO-DATE
+> Task :jlatexmath:compileReleaseShaders NO-SOURCE
+> Task :jlatexmath:generateReleaseAssets UP-TO-DATE
+> Task :jlatexmath:mergeReleaseAssets UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneJniLibFolders
+
+> Task :TMessagesProj_AppStandalone:checkAfatStandaloneDuplicateClasses
+WARNING: [Processor] Library '/root/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-cast-framework/21.4.0/c48f09b1c439b395ce46bc0d1c187913819f8c7f/play-services-cast-framework-21.4.0.aar' contains references to both AndroidX and old support library. This seems like the library is partially migrated. Jetifier will try to rewrite the library anyway.
+ Example of androidX reference: 'androidx/core/app/TaskStackBuilder'
+ Example of support library reference: 'android/support/v4/media/session/MediaSessionCompat$Token'
+WARNING: [Processor] Library '/root/.gradle/caches/modules-2/files-2.1/androidx.car.app/app/1.4.0/406ebf5913d8c23ff636e5ef54d306560e2b5de5/app-1.4.0.aar' contains references to both AndroidX and old support library. This seems like the library is partially migrated. Jetifier will try to rewrite the library anyway.
+ Example of androidX reference: 'androidx/car/app/media/IMediaPlaybackHost'
+ Example of support library reference: 'android/support/v4/media/session/MediaSessionCompat$Token'
+
+> Task :TMessagesProj_AppStandalone:generateAfatStandaloneBuildConfig
+> Task :TMessagesProj_AppStandalone:generateAfatStandaloneResValues
+> Task :TMessagesProj_AppStandalone:javaPreCompileAfatStandalone
+> Task :TMessagesProj_AppStandalone:processAfatStandaloneGoogleServices
+> Task :TMessagesProj_AppStandalone:generateAfatStandaloneResources
+> Task :TMessagesProj_AppStandalone:createAfatStandaloneCompatibleScreenManifests
+> Task :TMessagesProj_AppStandalone:extractDeepLinksAfatStandalone
+> Task :TMessagesProj_AppStandalone:extractProguardFiles
+> Task :TMessagesProj_AppStandalone:processAfatStandaloneJavaRes NO-SOURCE
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneStartupProfile UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneShaders
+> Task :TMessagesProj_AppStandalone:compileAfatStandaloneShaders NO-SOURCE
+> Task :TMessagesProj_AppStandalone:generateAfatStandaloneAssets UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:extractAfatStandaloneVersionControlInfo
+> Task :TMessagesProj_AppStandalone:collectAfatStandaloneDependencies
+> Task :TMessagesProj_AppStandalone:sdkAfatStandaloneDependencyData
+> Task :TMessagesProj_AppStandalone:validateSigningAfatStandalone
+> Task :TMessagesProj_AppStandalone:writeAfatStandaloneAppMetadata
+> Task :TMessagesProj_AppStandalone:writeAfatStandaloneSigningConfigVersions
+> Task :TMessagesProj:buildCMakeRelWithDebInfo[arm64-v8a][tmessages.49]
+> Task :TMessagesProj:configureCMakeRelWithDebInfo[armeabi-v7a]
+> Task :TMessagesProj:buildCMakeRelWithDebInfo[armeabi-v7a][tmessages.49]
+> Task :TMessagesProj:configureCMakeRelWithDebInfo[x86]
+> Task :TMessagesProj:buildCMakeRelWithDebInfo[x86][tmessages.49]
+> Task :TMessagesProj:configureCMakeRelWithDebInfo[x86_64]
+> Task :TMessagesProj:buildCMakeRelWithDebInfo[x86_64][tmessages.49]
+> Task :TMessagesProj:mergeStandaloneJniLibFolders
+> Task :TMessagesProj:prepareStandaloneArtProfile UP-TO-DATE
+> Task :TMessagesProj:generateStandaloneBuildConfig
+> Task :TMessagesProj:generateStandaloneResValues
+> Task :TMessagesProj:processStandaloneGoogleServices
+
+> Task :TMessagesProj:generateStandaloneLottieMeta
+R.raw.addone_icon — fps=60, frames=120, mono=false
+R.raw.android_30 — fps=60, frames=180, mono=false
+R.raw.auto_night_off — fps=60, frames=180, mono=false
+R.raw.biz_clock — fps=60, frames=180, mono=false
+R.raw.biz_links — fps=60, frames=125, mono=false
+R.raw.biz_map — fps=60, frames=180, mono=false
+R.raw.boosts — fps=60, frames=49, mono=false
+R.raw.bot_webview_sheet_to_cross — fps=60, frames=22, mono=false
+R.raw.bt_to_speaker — fps=60, frames=60, mono=false
+R.raw.bubble — fps=60, frames=180, mono=false
+R.raw.cake — fps=60, frames=180, mono=false
+R.raw.call_accept — fps=60, frames=180, mono=false
+R.raw.call_mute — fps=60, frames=60, mono=false
+R.raw.calls_log — fps=60, frames=120, mono=false
+R.raw.camera — fps=60, frames=86, mono=false
+R.raw.camera_flip — fps=60, frames=40, mono=false
+R.raw.camera_flip2 — fps=60, frames=60, mono=false
+R.raw.camera_outline — fps=60, frames=86, mono=false
+R.raw.camera_wait — fps=60, frames=300, mono=false
+R.raw.caption_down — fps=60, frames=35, mono=false
+R.raw.caption_hide — fps=60, frames=20, mono=false
+R.raw.caption_limit — fps=60, frames=90, mono=false
+R.raw.caption_show — fps=60, frames=20, mono=false
+R.raw.caption_up — fps=60, frames=35, mono=false
+R.raw.channel_create — fps=60, frames=180, mono=false
+R.raw.chat_audio_record_delete — fps=60, frames=52, mono=false
+R.raw.chat_audio_record_delete_2 — fps=60, frames=52, mono=false
+R.raw.chat_audio_record_delete_3 — fps=60, frames=40, mono=false
+R.raw.chats_archive — fps=60, frames=50, mono=false
+R.raw.chats_archiveavatar — fps=60, frames=50, mono=false
+R.raw.chats_archived — fps=60, frames=45, mono=false
+R.raw.chats_hide — fps=60, frames=50, mono=false
+R.raw.chats_infotip — fps=60, frames=45, mono=false
+R.raw.chats_swipearchive — fps=60, frames=120, mono=false
+R.raw.chats_unarchive — fps=60, frames=50, mono=false
+R.raw.chats_unhide — fps=60, frames=50, mono=false
+R.raw.chrome_30 — fps=60, frames=180, mono=false
+R.raw.code_laptop — fps=60, frames=64, mono=false
+R.raw.contact_check — fps=60, frames=45, mono=false
+R.raw.contacts_sync_off — fps=60, frames=120, mono=false
+R.raw.contacts_sync_on — fps=60, frames=120, mono=false
+R.raw.convert_video — fps=60, frames=38, mono=false
+R.raw.copy — fps=60, frames=61, mono=false
+R.raw.custom_emoji_reaction — fps=60, frames=89, mono=false
+R.raw.dartloop — fps=60, frames=90, mono=false
+R.raw.db_migration_placeholder — fps=60, frames=180, mono=false
+R.raw.diceloop — fps=60, frames=60, mono=false
+R.raw.done — fps=60, frames=120, mono=false
+R.raw.dots_loading — fps=60, frames=60, mono=false
+R.raw.double_icon — fps=60, frames=120, mono=false
+R.raw.download_arrow — fps=60, frames=30, mono=false
+R.raw.download_finish — fps=60, frames=41, mono=false
+R.raw.download_progress — fps=60, frames=50, mono=false
+R.raw.e_hand_2 — fps=60, frames=180, mono=false
+R.raw.edge_30 — fps=60, frames=180, mono=false
+R.raw.email_check_inbox — fps=60, frames=141, mono=false
+R.raw.email_setup_heart — fps=60, frames=180, mono=false
+R.raw.emoji_stars — fps=60, frames=180, mono=false
+R.raw.error — fps=60, frames=120, mono=false
+R.raw.filter_new — fps=60, frames=120, mono=false
+R.raw.filter_no_chats — fps=60, frames=180, mono=false
+R.raw.filter_reorder — fps=60, frames=61, mono=false
+R.raw.filters — fps=60, frames=180, mono=false
+R.raw.fire_off — fps=60, frames=120, mono=false
+R.raw.fire_on — fps=60, frames=120, mono=false
+R.raw.fire_once — fps=60, frames=120, mono=false
+R.raw.firefox_30 — fps=60, frames=180, mono=false
+R.raw.folder_in — fps=60, frames=57, mono=false
+R.raw.folder_out — fps=60, frames=54, mono=false
+R.raw.folder_share — fps=60, frames=91, mono=false
+R.raw.forward — fps=60, frames=47, mono=false
+R.raw.fragment — fps=60, frames=59, mono=false
+R.raw.fragment_username — fps=60, frames=180, mono=false
+R.raw.gif_to_keyboard — fps=60, frames=12, mono=false
+R.raw.gif_to_smile — fps=60, frames=12, mono=false
+R.raw.gift — fps=60, frames=180, mono=false
+R.raw.gift_broken — fps=60, frames=180, mono=false
+R.raw.gift_crafting — fps=60, frames=47, mono=false
+R.raw.gift_upgrade — fps=60, frames=42, mono=false
+R.raw.gigagroup_convert — fps=60, frames=120, mono=false
+R.raw.giveaway_results — fps=60, frames=180, mono=false
+R.raw.group_pip_delete_icon — fps=60, frames=66, mono=false
+R.raw.hand_1 — fps=60, frames=720, mono=false
+R.raw.hand_2 — fps=60, frames=540, mono=false
+R.raw.hint_swipe_reply — fps=60, frames=120, mono=false
+R.raw.ic_admin — fps=60, frames=120, mono=false
+R.raw.ic_ban — fps=60, frames=120, mono=false
+R.raw.ic_boosts_replace — fps=60, frames=90, mono=false
+R.raw.ic_delete — fps=60, frames=66, mono=false
+R.raw.ic_download — fps=60, frames=120, mono=false
+R.raw.ic_mute — fps=60, frames=66, mono=false
+R.raw.ic_pin — fps=60, frames=120, mono=false
+R.raw.ic_save_to_gallery — fps=60, frames=65, mono=false
+R.raw.ic_save_to_gifs — fps=60, frames=90, mono=false
+R.raw.ic_save_to_music — fps=60, frames=120, mono=false
+R.raw.ic_unban — fps=60, frames=120, mono=false
+R.raw.ic_unmute — fps=60, frames=65, mono=false
+R.raw.ic_unpin — fps=60, frames=120, mono=false
+R.raw.import_check — fps=60, frames=13, mono=false
+R.raw.import_finish — fps=60, frames=120, mono=false
+R.raw.import_loop — fps=60, frames=180, mono=false
+R.raw.import_progress — fps=60, frames=57, mono=false
+R.raw.imported — fps=60, frames=120, mono=false
+R.raw.incoming_calls — fps=60, frames=90, mono=false
+R.raw.info — fps=60, frames=45, mono=false
+R.raw.ipad_30 — fps=60, frames=180, mono=false
+R.raw.iphone_30 — fps=60, frames=180, mono=false
+R.raw.keyboard_to_gif — fps=60, frames=12, mono=false
+R.raw.keyboard_to_smile — fps=60, frames=12, mono=false
+R.raw.keyboard_to_sticker — fps=60, frames=12, mono=false
+R.raw.large_lastseen — fps=60, frames=180, mono=false
+R.raw.large_message_lock — fps=60, frames=180, mono=false
+R.raw.large_readtime — fps=60, frames=180, mono=false
+R.raw.linkbroken — fps=60, frames=120, mono=false
+R.raw.linux_30 — fps=60, frames=180, mono=false
+R.raw.mac_30 — fps=60, frames=180, mono=false
+R.raw.media_enlarge — fps=60, frames=20, mono=false
+R.raw.media_forbidden — fps=60, frames=180, mono=false
+R.raw.media_mute_unmute — fps=60, frames=44, mono=false
+R.raw.media_shrink — fps=60, frames=20, mono=false
+R.raw.monetize — fps=60, frames=45, mono=false
+R.raw.msg_antispam — fps=60, frames=62, mono=false
+R.raw.msg_emoji_activities — fps=60, frames=60, mono=false
+R.raw.msg_emoji_cat — fps=60, frames=60, mono=false
+R.raw.msg_emoji_flags — fps=60, frames=60, mono=false
+R.raw.msg_emoji_food — fps=60, frames=60, mono=false
+R.raw.msg_emoji_objects — fps=60, frames=60, mono=false
+R.raw.msg_emoji_other — fps=60, frames=60, mono=false
+R.raw.msg_emoji_smiles — fps=60, frames=60, mono=false
+R.raw.msg_emoji_travel — fps=60, frames=60, mono=false
+R.raw.msg_stories_archive — fps=60, frames=27, mono=false
+R.raw.msg_stories_saved — fps=60, frames=40, mono=false
+R.raw.msg_story_keep — fps=60, frames=46, mono=false
+R.raw.msg_translate — fps=60, frames=180, mono=false
+R.raw.mute_for — fps=60, frames=61, mono=false
+R.raw.name_hide — fps=60, frames=20, mono=false
+R.raw.name_show — fps=60, frames=20, mono=false
+R.raw.not_available — fps=60, frames=180, mono=false
+R.raw.notify_toggle — fps=60, frames=80, mono=false
+R.raw.options_to_search — fps=60, frames=120, mono=false
+R.raw.passcode_lock — fps=60, frames=71, mono=false
+R.raw.passcode_lock_close — fps=60, frames=39, mono=false
+R.raw.passkey — fps=60, frames=157, mono=false
+R.raw.payment_success — fps=60, frames=63, mono=false
+R.raw.permission_request_apk — fps=60, frames=180, mono=false
+R.raw.permission_request_camera — fps=60, frames=60, mono=false
+R.raw.permission_request_contacts — fps=60, frames=120, mono=false
+R.raw.permission_request_folder — fps=60, frames=240, mono=false
+R.raw.permission_request_location — fps=60, frames=60, mono=false
+R.raw.permission_request_microphone — fps=60, frames=60, mono=false
+R.raw.phone_dots — fps=60, frames=60, mono=false
+R.raw.phone_dots_to_stars — fps=60, frames=10, mono=false
+R.raw.phone_flash_call — fps=60, frames=64, mono=false
+R.raw.phone_stars_to_dots — fps=60, frames=10, mono=false
+R.raw.photo_arrow — fps=60, frames=30, mono=false
+R.raw.photo_blur — fps=60, frames=30, mono=false
+R.raw.photo_eraser — fps=60, frames=30, mono=false
+R.raw.photo_marker — fps=60, frames=30, mono=false
+R.raw.photo_neon — fps=60, frames=30, mono=false
+R.raw.photo_pen — fps=60, frames=30, mono=false
+R.raw.photo_spoiler — fps=60, frames=180, mono=false
+R.raw.photo_suggest_icon — fps=60, frames=85, mono=false
+R.raw.photo_text_allign — fps=60, frames=60, mono=false
+R.raw.plane_logo_plain — fps=60, frames=54, mono=false
+R.raw.player_prev — fps=60, frames=25, mono=false
+R.raw.position_above — fps=60, frames=20, mono=false
+R.raw.position_below — fps=60, frames=20, mono=false
+R.raw.premium_gift — fps=60, frames=180, mono=false
+R.raw.profile_leave — fps=60, frames=48, mono=false
+R.raw.profile_muting — fps=60, frames=37, mono=false
+R.raw.profile_unmuting — fps=60, frames=57, mono=false
+R.raw.profile_voicechat — fps=60, frames=48, mono=false
+R.raw.qr_code_logo — fps=60, frames=54, mono=false
+R.raw.qr_login — fps=60, frames=360, mono=false
+R.raw.qr_matrix — fps=60, frames=180, mono=false
+R.raw.raised_hand — fps=60, frames=90, mono=false
+R.raw.rate — fps=60, frames=90, mono=false
+R.raw.report_police — fps=60, frames=180, mono=false
+R.raw.roundcamera_flash_off — fps=60, frames=30, mono=false
+R.raw.roundcamera_flash_on — fps=60, frames=30, mono=false
+R.raw.roundcamera_flip — fps=60, frames=30, mono=false
+R.raw.safari_30 — fps=60, frames=180, mono=false
+R.raw.sandclock — fps=60, frames=180, mono=false
+R.raw.saved_messages — fps=60, frames=56, mono=false
+R.raw.seek_speed_hint — fps=60, frames=42, mono=false
+R.raw.shared_link_enter — fps=60, frames=43, mono=false
+R.raw.silent_mute — fps=60, frames=58, mono=false
+R.raw.silent_unmute — fps=60, frames=58, mono=false
+R.raw.smile_to_gif — fps=60, frames=12, mono=false
+R.raw.smile_to_keyboard — fps=60, frames=12, mono=false
+R.raw.smile_to_sticker — fps=60, frames=12, mono=false
+R.raw.sms_incoming_info — fps=60, frames=90, mono=false
+R.raw.sound_download — fps=60, frames=66, mono=false
+R.raw.sound_off — fps=60, frames=61, mono=false
+R.raw.sound_on — fps=60, frames=61, mono=false
+R.raw.speaker — fps=60, frames=34, mono=false
+R.raw.speaker_to_bt — fps=60, frames=60, mono=false
+R.raw.speed_15to2 — fps=60, frames=75, mono=false
+R.raw.speed_1to15 — fps=60, frames=75, mono=false
+R.raw.speed_2to1 — fps=60, frames=72, mono=false
+R.raw.speed_fast — fps=60, frames=75, mono=false
+R.raw.speed_limit — fps=60, frames=51, mono=false
+R.raw.speed_slow — fps=60, frames=72, mono=false
+R.raw.star_fill — fps=60, frames=180, mono=false
+R.raw.star_premium_2 — fps=60, frames=50, mono=false
+R.raw.star_reaction — fps=60, frames=163, mono=false
+R.raw.star_reaction_click — fps=60, frames=125, mono=false
+R.raw.star_reaction_effect1 — fps=60, frames=90, mono=false
+R.raw.star_reaction_effect2 — fps=60, frames=83, mono=false
+R.raw.star_reaction_effect3 — fps=60, frames=85, mono=false
+R.raw.star_reaction_effect4 — fps=60, frames=90, mono=false
+R.raw.star_reaction_effect5 — fps=60, frames=90, mono=false
+R.raw.star_stroke — fps=60, frames=180, mono=false
+R.raw.stars_send — fps=60, frames=140, mono=false
+R.raw.stars_topup — fps=60, frames=109, mono=false
+R.raw.statistic_preload — fps=60, frames=180, mono=false
+R.raw.sticker_to_keyboard — fps=60, frames=12, mono=false
+R.raw.sticker_to_smile — fps=60, frames=12, mono=false
+R.raw.stories_intro_go_back — fps=60, frames=40, mono=false
+R.raw.stories_intro_go_forward — fps=60, frames=38, mono=false
+R.raw.stories_intro_go_to_next — fps=60, frames=39, mono=false
+R.raw.stories_intro_pause — fps=60, frames=46, mono=false
+R.raw.story_bomb1 — fps=60, frames=44, mono=false
+R.raw.story_bomb2 — fps=60, frames=51, mono=false
+R.raw.story_repost — fps=60, frames=36, mono=false
+R.raw.sun — fps=60, frames=36, mono=false
+R.raw.sun_outline — fps=60, frames=36, mono=false
+R.raw.swipe_community_ungroup — fps=60, frames=29, mono=false
+R.raw.swipe_delete — fps=60, frames=38, mono=false
+R.raw.swipe_disabled — fps=60, frames=30, mono=false
+R.raw.swipe_mute — fps=60, frames=35, mono=false
+R.raw.swipe_pin — fps=60, frames=31, mono=false
+R.raw.swipe_read — fps=60, frames=35, mono=false
+R.raw.swipe_unmute — fps=60, frames=35, mono=false
+R.raw.swipe_unpin — fps=60, frames=48, mono=false
+R.raw.swipe_unread — fps=60, frames=36, mono=false
+R.raw.tab_article — fps=60, frames=16, mono=false
+R.raw.tab_article_reverse — fps=60, frames=5, mono=false
+R.raw.tab_calls — fps=60, frames=6, mono=false
+R.raw.tab_chats — fps=60, frames=6, mono=false
+R.raw.tab_checklist — fps=60, frames=17, mono=false
+R.raw.tab_checklist_reverse — fps=60, frames=5, mono=false
+R.raw.tab_colors — fps=60, frames=17, mono=false
+R.raw.tab_colors_reverse — fps=60, frames=5, mono=false
+R.raw.tab_contacts — fps=60, frames=6, mono=false
+R.raw.tab_emoji — fps=60, frames=18, mono=false
+R.raw.tab_emoji_reverse — fps=60, frames=5, mono=false
+R.raw.tab_files — fps=60, frames=17, mono=false
+R.raw.tab_files_reverse — fps=60, frames=5, mono=false
+R.raw.tab_gallery — fps=60, frames=17, mono=false
+R.raw.tab_gallery_reverse — fps=60, frames=5, mono=false
+R.raw.tab_gift — fps=60, frames=17, mono=false
+R.raw.tab_gift_reverse — fps=60, frames=5, mono=false
+R.raw.tab_location — fps=60, frames=17, mono=false
+R.raw.tab_location_reverse — fps=60, frames=5, mono=false
+R.raw.tab_models — fps=60, frames=17, mono=false
+R.raw.tab_models_reverse — fps=60, frames=5, mono=false
+R.raw.tab_music — fps=60, frames=17, mono=false
+R.raw.tab_music_reverse — fps=60, frames=5, mono=false
+R.raw.tab_poll — fps=60, frames=17, mono=false
+R.raw.tab_poll_reverse — fps=60, frames=5, mono=false
+R.raw.tab_reply — fps=60, frames=17, mono=false
+R.raw.tab_reply_reverse — fps=60, frames=5, mono=false
+R.raw.tab_settings — fps=60, frames=6, mono=false
+R.raw.tab_sticker — fps=60, frames=17, mono=false
+R.raw.tab_sticker_reverse — fps=60, frames=5, mono=false
+R.raw.tab_symbols — fps=60, frames=17, mono=false
+R.raw.tab_symbols_reverse — fps=60, frames=5, mono=false
+R.raw.tab_wallet — fps=60, frames=17, mono=false
+R.raw.tab_wallet_reverse — fps=60, frames=5, mono=false
+R.raw.tag_icon_3 — fps=60, frames=57, mono=false
+R.raw.ticks_double — fps=60, frames=54, mono=false
+R.raw.ticks_single — fps=60, frames=25, mono=false
+R.raw.timer_3 — fps=60, frames=66, mono=false
+R.raw.timer_toast — fps=60, frames=41, mono=false
+R.raw.topics — fps=60, frames=180, mono=false
+R.raw.topics_list — fps=60, frames=100, mono=false
+R.raw.topics_tabs — fps=60, frames=100, mono=false
+R.raw.topics_top — fps=60, frames=157, mono=false
+R.raw.transcribe — fps=60, frames=180, mono=false
+R.raw.transcribe_in — fps=60, frames=20, mono=false
+R.raw.transcribe_out — fps=60, frames=20, mono=false
+R.raw.tsv_monkey_close — fps=60, frames=98, mono=false
+R.raw.tsv_setup_email_sent — fps=60, frames=180, mono=false
+R.raw.tsv_setup_hint — fps=60, frames=180, mono=false
+R.raw.tsv_setup_intro — fps=60, frames=180, mono=false
+R.raw.tsv_setup_mail — fps=60, frames=160, mono=false
+R.raw.tsv_setup_monkey_close_and_peek — fps=60, frames=33, mono=false
+R.raw.tsv_setup_monkey_close_and_peek_to_idle — fps=60, frames=33, mono=false
+R.raw.tsv_setup_monkey_idle1 — fps=60, frames=30, mono=false
+R.raw.tsv_setup_monkey_idle2 — fps=60, frames=30, mono=false
+R.raw.tsv_setup_monkey_peek — fps=60, frames=33, mono=false
+R.raw.tsv_setup_monkey_tracking — fps=60, frames=180, mono=false
+R.raw.ubuntu_30 — fps=60, frames=180, mono=false
+R.raw.unlock_icon — fps=60, frames=120, mono=false
+R.raw.utyan_cache — fps=60, frames=180, mono=false
+R.raw.utyan_call — fps=60, frames=180, mono=false
+R.raw.utyan_change_number — fps=60, frames=180, mono=false
+R.raw.utyan_draw — fps=60, frames=180, mono=false
+R.raw.utyan_empty — fps=60, frames=180, mono=false
+R.raw.utyan_empty2 — fps=60, frames=180, mono=false
+R.raw.utyan_gallery — fps=60, frames=180, mono=false
+R.raw.utyan_gigagroup — fps=60, frames=150, mono=false
+R.raw.utyan_newborn — fps=60, frames=180, mono=false
+R.raw.utyan_passcode — fps=60, frames=180, mono=false
+R.raw.utyan_private — fps=60, frames=180, mono=false
+R.raw.utyan_saved_messages — fps=60, frames=180, mono=false
+R.raw.utyan_schedule — fps=60, frames=180, mono=false
+R.raw.utyan_streaming — fps=60, frames=180, mono=false
+R.raw.video_stop — fps=60, frames=60, mono=false
+R.raw.voice_and_video — fps=60, frames=60, mono=false
+R.raw.voice_mini — fps=60, frames=172, mono=false
+R.raw.voice_muted — fps=60, frames=29, mono=false
+R.raw.voice_outlined — fps=60, frames=24, mono=false
+R.raw.voice_outlined2 — fps=60, frames=84, mono=false
+R.raw.voice_to_text — fps=60, frames=120, mono=false
+R.raw.voip_allow_talk — fps=60, frames=52, mono=false
+R.raw.voip_filled — fps=60, frames=404, mono=false
+R.raw.voip_invite — fps=60, frames=120, mono=false
+R.raw.voip_muted — fps=60, frames=120, mono=false
+R.raw.voip_record_saved — fps=60, frames=56, mono=false
+R.raw.voip_record_start — fps=60, frames=64, mono=false
+R.raw.voip_unmuted — fps=60, frames=120, mono=false
+R.raw.wallet_allset — fps=60, frames=180, mono=false
+R.raw.wallet_congrats — fps=60, frames=180, mono=false
+R.raw.wallet_perfect — fps=60, frames=120, mono=false
+R.raw.wallet_science — fps=60, frames=180, mono=false
+R.raw.windows_30 — fps=60, frames=180, mono=false
+R.raw.write_contacts_fab_icon — fps=60, frames=49, mono=false
+
+> Task :TMessagesProj:generateStandaloneResources
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneArtProfile
+> Task :TMessagesProj:packageStandaloneResources
+> Task :TMessagesProj:javaPreCompileStandalone
+> Task :TMessagesProj:extractProguardFiles
+> Task :TMessagesProj:processStandaloneJavaRes NO-SOURCE
+> Task :TMessagesProj:mergeStandaloneJavaResource
+
+> Task :TMessagesProj:processStandaloneManifest
+/root/staticgram-client/TMessagesProj/src/main/AndroidManifest.xml:81:5-102 Warning:
+	uses-permission#android.permission.WRITE_EXTERNAL_STORAGE was tagged at AndroidManifest.xml:81 to replace another declaration but no other declaration present
+/root/staticgram-client/TMessagesProj/src/main/AndroidManifest.xml:95:5-699:19 Warning:
+	application@android:supportsRtl was tagged at AndroidManifest.xml:95 to replace other declarations but no other declaration present
+
+> Task :TMessagesProj:extractDeepLinksStandalone
+> Task :TMessagesProj:generateStandaloneLibraryProguardRules
+> Task :TMessagesProj:writeStandaloneAarMetadata
+> Task :TMessagesProj:mergeStandaloneShaders
+> Task :TMessagesProj:compileStandaloneShaders NO-SOURCE
+> Task :TMessagesProj:generateStandaloneAssets UP-TO-DATE
+> Task :TMessagesProj:parseStandaloneLocalResources
+> Task :TMessagesProj:mergeStandaloneNativeLibs
+> Task :TMessagesProj_AppStandalone:expandAfatStandaloneL8ArtProfileWildcards
+> Task :TMessagesProj_AppStandalone:checkAfatStandaloneAarMetadata
+> Task :TMessagesProj_AppStandalone:mapAfatStandaloneSourceSetPaths
+> Task :TMessagesProj:mergeStandaloneAssets
+> Task :TMessagesProj:generateStandaloneRFile
+
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneResources
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:4359:4: Multiple substitutions specified in non-positional format of string resource string/Gift2ActiveAuctionsActiveBidActive. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:4362:4: Multiple substitutions specified in non-positional format of string resource string/Gift2ActiveAuctionsActiveRound. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:4411:4: Multiple substitutions specified in non-positional format of string resource string/Gift2AuctionInfo2_one. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:4412:4: Multiple substitutions specified in non-positional format of string resource string/Gift2AuctionInfo2_other. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:4415:4: Multiple substitutions specified in non-positional format of string resource string/Gift2AuctionInfoLearnMore2_one. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:4416:4: Multiple substitutions specified in non-positional format of string resource string/Gift2AuctionInfoLearnMore2_other. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:4417:4: Multiple substitutions specified in non-positional format of string resource string/Gift2AuctionInfo_one. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:4418:4: Multiple substitutions specified in non-positional format of string resource string/Gift2AuctionInfo_other. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:4463:4: Multiple substitutions specified in non-positional format of string resource string/Gift2AuctionsChangeRecipient2. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:4473:4: Multiple substitutions specified in non-positional format of string resource string/Gift2AveragePriceHint. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:4591:4: Multiple substitutions specified in non-positional format of string resource string/Gift2InfoOutConverted_one. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:4592:4: Multiple substitutions specified in non-positional format of string resource string/Gift2InfoOutConverted_other. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:4865:4: Multiple substitutions specified in non-positional format of string resource string/GiftAuctionInfo1Text_one. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:4866:4: Multiple substitutions specified in non-positional format of string resource string/GiftAuctionInfo1Text_other. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:4972:4: Multiple substitutions specified in non-positional format of string resource string/GiftOfferPayMulti. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:6593:4: Multiple substitutions specified in non-positional format of string resource string/NotificationTopicExceptionsDesctription_one. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:6594:4: Multiple substitutions specified in non-positional format of string resource string/NotificationTopicExceptionsDesctription_other. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9192:4: Multiple substitutions specified in non-positional format of string resource string/StarRatingDescription1. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9193:4: Multiple substitutions specified in non-positional format of string resource string/StarRatingDescription2. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9194:4: Multiple substitutions specified in non-positional format of string resource string/StarRatingDescription3. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9605:4: Multiple substitutions specified in non-positional format of string resource string/StoryAddedToAlbumTitle_one. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9606:4: Multiple substitutions specified in non-positional format of string resource string/StoryAddedToAlbumTitle_other. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9808:4: Multiple substitutions specified in non-positional format of string resource string/StoryRemovedFromAlbumTitle_one. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9809:4: Multiple substitutions specified in non-positional format of string resource string/StoryRemovedFromAlbumTitle_other. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9880:4: Multiple substitutions specified in non-positional format of string resource string/SuggestAPostBelowSubtitleStarsAndTime. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9934:4: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedAdmin1. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9935:4: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedAdmin1PastSimple. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9937:4: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedAdmin2. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9938:4: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedAdmin3Stars. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9939:4: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedAdmin3TON. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9940:4: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedAdmin4Stars. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9941:4: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedAdmin4TON. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9942:4: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedUser1. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9943:4: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedUser1PastSimple. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9946:4: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedUser3Stars. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9947:4: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedUser3TON. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9948:4: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedUser4Stars. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:9949:4: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedUser4TON. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:10382:4: Multiple substitutions specified in non-positional format of string resource string/UnconfirmedAuthMultipleFrom_one. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml:10383:4: Multiple substitutions specified in non-positional format of string resource string/UnconfirmedAuthMultipleFrom_other. Did you mean to add the formatted="false" attribute?
+
+> Task :TMessagesProj:compileStandaloneLibraryResources
+
+> Task :TMessagesProj:compileStandaloneJavaWithJavac
+Java compiler version 21 has deprecated support for compiling with source/target version 8.
+Try one of the following options:
+    1. [Recommended] Use Java toolchain with a lower language version
+    2. Set a higher source/target version
+    3. Use a lower version of the JDK running the build (if you're not using Java toolchain)
+For more details on how to configure these settings, see https://developer.android.com/build/jdks.
+To suppress this warning, set android.javaCompile.suppressSourceTargetDeprecationWarning=true in gradle.properties.
+
+> Task :TMessagesProj_AppStandalone:processAfatStandaloneMainManifest
+/root/staticgram-client/TMessagesProj/config/release/AndroidManifest_standalone.xml Warning:
+	uses-permission#android.permission.WRITE_EXTERNAL_STORAGE was tagged at AndroidManifest_standalone.xml:0 to replace another declaration but no other declaration present
+/root/staticgram-client/TMessagesProj/config/release/AndroidManifest_standalone.xml:137:9-145:20 Warning:
+	receiver#com.google.android.gms.measurement.AppMeasurementReceiver@android:enabled was tagged at AndroidManifest_standalone.xml:137 to replace other declarations but no other declaration present
+/root/staticgram-client/TMessagesProj/config/release/AndroidManifest_standalone.xml:153:9-157:40 Warning:
+	service#com.google.android.gms.measurement.AppMeasurementService@android:enabled was tagged at AndroidManifest_standalone.xml:153 to replace other declarations but no other declaration present
+
+> Task :TMessagesProj_AppStandalone:processAfatStandaloneManifest
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneJavaResource
+
+> Task :TMessagesProj:compileStandaloneJavaWithJavac
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneAssets
+> Task :TMessagesProj_AppStandalone:processAfatStandaloneManifestForPackage
+> Task :TMessagesProj:copyStandaloneJniLibsProjectOnly
+> Task :TMessagesProj_AppStandalone:compressAfatStandaloneAssets
+warn: removing resource com.staticgram.org:string/ActionUniqueGiftResaleGiftOutbound_few without required default value.
+warn: removing resource com.staticgram.org:string/ActionUniqueGiftResaleGiftOutbound_many without required default value.
+warn: removing resource com.staticgram.org:string/AddManyMembersAlertNamesText_few without required default value.
+warn: removing resource com.staticgram.org:string/AddManyMembersAlertNamesText_two without required default value.
+warn: removing resource com.staticgram.org:string/AddManyMembersAlertTitle_few without required default value.
+warn: removing resource com.staticgram.org:string/AddManyMembersAlertTitle_many without required default value.
+warn: removing resource com.staticgram.org:string/AddManyMembersAlertTitle_two without required default value.
+warn: removing resource com.staticgram.org:string/EmailPasswordConfirmText3 without required default value.
+warn: removing resource com.staticgram.org:string/Languages_few without required default value.
+warn: removing resource com.staticgram.org:string/Languages_many without required default value.
+warn: removing resource com.staticgram.org:string/Languages_two without required default value.
+warn: removing resource com.staticgram.org:string/Languages_zero without required default value.
+warn: removing resource com.staticgram.org:string/NoContactsYet without required default value.
+warn: removing resource com.staticgram.org:string/NoContactsYetLine1 without required default value.
+warn: removing resource com.staticgram.org:string/NoContactsYetLine2 without required default value.
+warn: removing resource com.staticgram.org:string/NoContactsYetLine3 without required default value.
+warn: removing resource com.staticgram.org:string/PleaseEnterFirstPassword without required default value.
+warn: removing resource com.staticgram.org:string/PleaseEnterPassword without required default value.
+warn: removing resource com.staticgram.org:string/ResetAccountButton without required default value.
+warn: removing resource com.staticgram.org:string/ResetMyAccountText without required default value.
+warn: removing resource com.staticgram.org:string/ShareTelegram without required default value.
+warn: removing resource com.staticgram.org:string/WidgetPasscodeEnable2 without required default value.
+warn: removing resource com.staticgram.org:string/YourEmailCode without required default value.
+warn: removing resource com.staticgram.org:string/YourEmailCodeInfo without required default value.
+warn: removing resource com.staticgram.org:string/YourPasswordSuccessText without required default value.
+warn: removing resource com.staticgram.org:string/formatterMonthName without required default value.
+warn: removing resource com.staticgram.org:string/formatterMonthYear2 without required default value.
+
+> Task :TMessagesProj_AppStandalone:processAfatStandaloneResources
+> Task :TMessagesProj_AppStandalone:optimizeAfatStandaloneResources
+
+> Task :TMessagesProj:compileStandaloneJavaWithJavac
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+3 warnings
+
+> Task :TMessagesProj:mergeStandaloneGeneratedProguardFiles UP-TO-DATE
+> Task :TMessagesProj:exportStandaloneConsumerProguardFiles UP-TO-DATE
+> Task :TMessagesProj:bundleLibCompileToJarStandalone
+
+> Task :TMessagesProj_AppStandalone:compileAfatStandaloneJavaWithJavac
+Java compiler version 21 has deprecated support for compiling with source/target version 8.
+Try one of the following options:
+    1. [Recommended] Use Java toolchain with a lower language version
+    2. Set a higher source/target version
+    3. Use a lower version of the JDK running the build (if you're not using Java toolchain)
+For more details on how to configure these settings, see https://developer.android.com/build/jdks.
+To suppress this warning, set android.javaCompile.suppressSourceTargetDeprecationWarning=true in gradle.properties.
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: /root/staticgram-client/TMessagesProj_AppStandalone/src/main/java/org/telegram/ui/SMSStatsActivity.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+3 warnings
+
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneGeneratedProguardFiles UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneNativeLibs
+
+> Task :TMessagesProj_AppStandalone:stripAfatStandaloneDebugSymbols
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+
+> Task :TMessagesProj_AppStandalone:extractAfatStandaloneNativeDebugMetadata
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+
+> Task :TMessagesProj:minifyStandaloneWithR8
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneNativeDebugMetadata
+> Task :TMessagesProj:bundleLibRuntimeToJarStandalone
+> Task :TMessagesProj_AppStandalone:expandAfatStandaloneArtProfileWildcards
+> Task :TMessagesProj_AppStandalone:minifyAfatStandaloneWithR8
+> Task :TMessagesProj_AppStandalone:l8DexDesugarLibAfatStandalone
+> Task :TMessagesProj_AppStandalone:compileAfatStandaloneArtProfile
+> Task :TMessagesProj_AppStandalone:packageAfatStandalone
+> Task :TMessagesProj_AppStandalone:createAfatStandaloneApkListingFileRedirect
+> Task :TMessagesProj_AppStandalone:assembleAfatStandalone
+[Incubating] Problems report is available at: file:///root/staticgram-client/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 8m 2s
+105 actionable tasks: 79 executed, 26 up-to-date
+EXIT=0

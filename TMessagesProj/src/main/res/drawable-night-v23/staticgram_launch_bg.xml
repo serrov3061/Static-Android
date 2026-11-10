@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- StaticGram: pre-Android-12 starting window: black + the static launch logo (no overlay animation). -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@android:color/black" />
+    <item android:gravity="center" android:drawable="@drawable/staticgram_splash_logo" />
+</layer-list>

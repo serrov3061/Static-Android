@@ -1,0 +1,338 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.11.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :buildSrc:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :buildSrc:compileKotlin UP-TO-DATE
+> Task :buildSrc:compileJava NO-SOURCE
+> Task :buildSrc:compileGroovy NO-SOURCE
+> Task :buildSrc:pluginDescriptors UP-TO-DATE
+> Task :buildSrc:processResources UP-TO-DATE
+> Task :buildSrc:classes UP-TO-DATE
+> Task :buildSrc:jar UP-TO-DATE
+
+> Configure project :jlatexmath
+WARNING: The option setting 'android.defaults.buildfeatures.buildconfig=true' is deprecated.
+The current default is 'false'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+To keep using this feature, add the following to your module-level build.gradle files:
+    android.buildFeatures.buildConfig = true
+or from Android Studio, click: `Refactor` > `Migrate BuildConfig to Gradle Build Files`.
+
+> Configure project :TMessagesProj
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+WARNING: [CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.2.12479018] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+
+> Configure project :TMessagesProj_AppHuawei
+--W- Build Environment: AGConnect plugin version is: 1.9.1.301, Gradle version is: 8.11.1, Android Plugin version is: 8.10.1
+--I- Using the AGConnect-Config file: /root/staticgram-client/TMessagesProj_AppHuawei/agconnect-services.json
+--W- The variant: afatDebug, Use the json file: /root/staticgram-client/TMessagesProj_AppHuawei/agconnect-services.json
+--I- Using the AGConnect-Config file: /root/staticgram-client/TMessagesProj_AppHuawei/agconnect-services.json
+--W- The variant: afatRelease, Use the json file: /root/staticgram-client/TMessagesProj_AppHuawei/agconnect-services.json
+
+> Task :jlatexmath:preBuild UP-TO-DATE
+> Task :jlatexmath:preReleaseBuild UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:preBuild UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:preAfatStandaloneBuild UP-TO-DATE
+> Task :jlatexmath:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :TMessagesProj:checkVisibility
+> Task :TMessagesProj:preBuild
+> Task :TMessagesProj:preStandaloneBuild
+> Task :jlatexmath:mergeReleaseNativeLibs NO-SOURCE
+> Task :jlatexmath:copyReleaseJniLibsProjectOnly UP-TO-DATE
+> Task :jlatexmath:prepareReleaseArtProfile UP-TO-DATE
+> Task :jlatexmath:generateReleaseBuildConfig UP-TO-DATE
+> Task :jlatexmath:generateReleaseResValues UP-TO-DATE
+> Task :jlatexmath:generateReleaseResources UP-TO-DATE
+> Task :jlatexmath:packageReleaseResources UP-TO-DATE
+> Task :jlatexmath:parseReleaseLocalResources UP-TO-DATE
+> Task :jlatexmath:generateReleaseRFile UP-TO-DATE
+> Task :jlatexmath:javaPreCompileRelease UP-TO-DATE
+> Task :TMessagesProj:configureCMakeRelWithDebInfo[arm64-v8a]
+> Task :jlatexmath:compileReleaseJavaWithJavac UP-TO-DATE
+> Task :jlatexmath:bundleLibCompileToJarRelease UP-TO-DATE
+> Task :jlatexmath:mergeReleaseGeneratedProguardFiles UP-TO-DATE
+> Task :jlatexmath:exportReleaseConsumerProguardFiles UP-TO-DATE
+> Task :jlatexmath:bundleLibRuntimeToJarRelease UP-TO-DATE
+> Task :jlatexmath:processReleaseJavaRes NO-SOURCE
+> Task :jlatexmath:compileReleaseLibraryResources UP-TO-DATE
+> Task :jlatexmath:writeReleaseAarMetadata UP-TO-DATE
+> Task :jlatexmath:extractDeepLinksRelease UP-TO-DATE
+> Task :jlatexmath:processReleaseManifest UP-TO-DATE
+> Task :jlatexmath:mergeReleaseShaders UP-TO-DATE
+> Task :jlatexmath:compileReleaseShaders NO-SOURCE
+> Task :jlatexmath:generateReleaseAssets UP-TO-DATE
+> Task :jlatexmath:mergeReleaseAssets UP-TO-DATE
+> Task :TMessagesProj:buildCMakeRelWithDebInfo[arm64-v8a][tmessages.49]
+> Task :TMessagesProj:configureCMakeRelWithDebInfo[armeabi-v7a]
+> Task :TMessagesProj:buildCMakeRelWithDebInfo[armeabi-v7a][tmessages.49]
+> Task :TMessagesProj:configureCMakeRelWithDebInfo[x86]
+> Task :TMessagesProj:buildCMakeRelWithDebInfo[x86][tmessages.49]
+> Task :TMessagesProj:configureCMakeRelWithDebInfo[x86_64]
+> Task :TMessagesProj:buildCMakeRelWithDebInfo[x86_64][tmessages.49]
+> Task :TMessagesProj:mergeStandaloneJniLibFolders UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneJniLibFolders UP-TO-DATE
+> Task :TMessagesProj:mergeStandaloneNativeLibs UP-TO-DATE
+> Task :TMessagesProj:copyStandaloneJniLibsProjectOnly UP-TO-DATE
+> Task :TMessagesProj:prepareStandaloneArtProfile UP-TO-DATE
+> Task :TMessagesProj:generateStandaloneBuildConfig UP-TO-DATE
+> Task :TMessagesProj:generateStandaloneResValues UP-TO-DATE
+> Task :TMessagesProj:processStandaloneGoogleServices UP-TO-DATE
+> Task :TMessagesProj:generateStandaloneLottieMeta UP-TO-DATE
+> Task :TMessagesProj:generateStandaloneResources
+> Task :TMessagesProj_AppStandalone:checkAfatStandaloneDuplicateClasses UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneNativeLibs UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:stripAfatStandaloneDebugSymbols UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:extractAfatStandaloneNativeDebugMetadata UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneNativeDebugMetadata UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneArtProfile UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:expandAfatStandaloneL8ArtProfileWildcards UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:generateAfatStandaloneBuildConfig
+> Task :TMessagesProj_AppStandalone:javaPreCompileAfatStandalone UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:generateAfatStandaloneResValues UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:processAfatStandaloneGoogleServices UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:generateAfatStandaloneResources UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:createAfatStandaloneCompatibleScreenManifests
+> Task :TMessagesProj_AppStandalone:extractDeepLinksAfatStandalone UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:extractProguardFiles UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:processAfatStandaloneJavaRes NO-SOURCE
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneStartupProfile UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneShaders UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:compileAfatStandaloneShaders NO-SOURCE
+> Task :TMessagesProj_AppStandalone:generateAfatStandaloneAssets UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:extractAfatStandaloneVersionControlInfo UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:collectAfatStandaloneDependencies UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:sdkAfatStandaloneDependencyData UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:validateSigningAfatStandalone UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:writeAfatStandaloneAppMetadata UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:writeAfatStandaloneSigningConfigVersions UP-TO-DATE
+> Task :TMessagesProj:packageStandaloneResources
+> Task :TMessagesProj:javaPreCompileStandalone UP-TO-DATE
+> Task :TMessagesProj:extractProguardFiles UP-TO-DATE
+> Task :TMessagesProj:processStandaloneManifest UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:mapAfatStandaloneSourceSetPaths
+> Task :TMessagesProj:generateStandaloneLibraryProguardRules
+> Task :TMessagesProj:processStandaloneJavaRes NO-SOURCE
+> Task :TMessagesProj:mergeStandaloneJavaResource UP-TO-DATE
+> Task :TMessagesProj:parseStandaloneLocalResources
+> Task :TMessagesProj:writeStandaloneAarMetadata UP-TO-DATE
+> Task :TMessagesProj:extractDeepLinksStandalone UP-TO-DATE
+> Task :TMessagesProj:compileStandaloneLibraryResources
+> Task :TMessagesProj:mergeStandaloneShaders UP-TO-DATE
+> Task :TMessagesProj:compileStandaloneShaders NO-SOURCE
+> Task :TMessagesProj:generateStandaloneAssets UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:checkAfatStandaloneAarMetadata UP-TO-DATE
+
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneResources
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/Gift2ActiveAuctionsActiveBidActive. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/Gift2ActiveAuctionsActiveRound. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/Gift2AuctionInfo2_one. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/Gift2AuctionInfo2_other. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/Gift2AuctionInfoLearnMore2_one. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/Gift2AuctionInfoLearnMore2_other. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/Gift2AuctionInfo_one. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/Gift2AuctionInfo_other. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/Gift2AuctionsChangeRecipient2. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/Gift2AveragePriceHint. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/Gift2InfoOutConverted_one. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/Gift2InfoOutConverted_other. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/GiftAuctionInfo1Text_one. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/GiftAuctionInfo1Text_other. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/GiftOfferPayMulti. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/NotificationTopicExceptionsDesctription_one. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/NotificationTopicExceptionsDesctription_other. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/StarRatingDescription1. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/StarRatingDescription2. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/StarRatingDescription3. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/StoryAddedToAlbumTitle_one. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/StoryAddedToAlbumTitle_other. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/StoryRemovedFromAlbumTitle_one. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/StoryRemovedFromAlbumTitle_other. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/SuggestAPostBelowSubtitleStarsAndTime. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedAdmin1. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedAdmin1PastSimple. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedAdmin2. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedAdmin3Stars. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedAdmin3TON. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedAdmin4Stars. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedAdmin4TON. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedUser1. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedUser1PastSimple. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedUser3Stars. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedUser3TON. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedUser4Stars. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/SuggestionAgreementReachedUser4TON. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/UnconfirmedAuthMultipleFrom_one. Did you mean to add the formatted="false" attribute?
+/root/staticgram-client/TMessagesProj/build/intermediates/packaged_res/standalone/packageStandaloneResources/values/values.xml: Multiple substitutions specified in non-positional format of string resource string/UnconfirmedAuthMultipleFrom_other. Did you mean to add the formatted="false" attribute?
+
+> Task :TMessagesProj:generateStandaloneRFile
+
+> Task :TMessagesProj_AppStandalone:processAfatStandaloneMainManifest
+/root/staticgram-client/TMessagesProj/config/release/AndroidManifest_standalone.xml Warning:
+	uses-permission#android.permission.WRITE_EXTERNAL_STORAGE was tagged at AndroidManifest_standalone.xml:0 to replace another declaration but no other declaration present
+/root/staticgram-client/TMessagesProj/config/release/AndroidManifest_standalone.xml:141:9-149:20 Warning:
+	receiver#com.google.android.gms.measurement.AppMeasurementReceiver@android:enabled was tagged at AndroidManifest_standalone.xml:141 to replace other declarations but no other declaration present
+/root/staticgram-client/TMessagesProj/config/release/AndroidManifest_standalone.xml:157:9-161:40 Warning:
+	service#com.google.android.gms.measurement.AppMeasurementService@android:enabled was tagged at AndroidManifest_standalone.xml:157 to replace other declarations but no other declaration present
+
+> Task :TMessagesProj_AppStandalone:processAfatStandaloneManifest
+> Task :TMessagesProj:mergeStandaloneAssets
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneJavaResource UP-TO-DATE
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneAssets
+> Task :TMessagesProj_AppStandalone:processAfatStandaloneManifestForPackage
+> Task :TMessagesProj_AppStandalone:compressAfatStandaloneAssets
+
+> Task :TMessagesProj:compileStandaloneJavaWithJavac
+Java compiler version 21 has deprecated support for compiling with source/target version 8.
+Try one of the following options:
+    1. [Recommended] Use Java toolchain with a lower language version
+    2. Set a higher source/target version
+    3. Use a lower version of the JDK running the build (if you're not using Java toolchain)
+For more details on how to configure these settings, see https://developer.android.com/build/jdks.
+To suppress this warning, set android.javaCompile.suppressSourceTargetDeprecationWarning=true in gradle.properties.
+
+warn: removing resource com.staticgram.org:string/AddManyMembersAlertNamesText_few without required default value.
+warn: removing resource com.staticgram.org:string/AddManyMembersAlertNamesText_two without required default value.
+warn: removing resource com.staticgram.org:string/AddManyMembersAlertTitle_few without required default value.
+warn: removing resource com.staticgram.org:string/AddManyMembersAlertTitle_many without required default value.
+warn: removing resource com.staticgram.org:string/AddManyMembersAlertTitle_two without required default value.
+warn: removing resource com.staticgram.org:string/EmailPasswordConfirmText3 without required default value.
+warn: removing resource com.staticgram.org:string/Languages_few without required default value.
+warn: removing resource com.staticgram.org:string/Languages_many without required default value.
+warn: removing resource com.staticgram.org:string/Languages_two without required default value.
+warn: removing resource com.staticgram.org:string/Languages_zero without required default value.
+warn: removing resource com.staticgram.org:string/NoContactsYet without required default value.
+warn: removing resource com.staticgram.org:string/NoContactsYetLine1 without required default value.
+warn: removing resource com.staticgram.org:string/NoContactsYetLine2 without required default value.
+warn: removing resource com.staticgram.org:string/NoContactsYetLine3 without required default value.
+warn: removing resource com.staticgram.org:string/PleaseEnterFirstPassword without required default value.
+warn: removing resource com.staticgram.org:string/PleaseEnterPassword without required default value.
+warn: removing resource com.staticgram.org:string/ResetAccountButton without required default value.
+warn: removing resource com.staticgram.org:string/ResetMyAccountText without required default value.
+warn: removing resource com.staticgram.org:string/ShareTelegram without required default value.
+warn: removing resource com.staticgram.org:string/WidgetPasscodeEnable2 without required default value.
+warn: removing resource com.staticgram.org:string/YourEmailCode without required default value.
+warn: removing resource com.staticgram.org:string/YourEmailCodeInfo without required default value.
+warn: removing resource com.staticgram.org:string/YourPasswordSuccessText without required default value.
+warn: removing resource com.staticgram.org:string/formatterMonthName without required default value.
+warn: removing resource com.staticgram.org:string/formatterMonthYear2 without required default value.
+
+
+> Task :TMessagesProj_AppStandalone:processAfatStandaloneResources
+> Task :TMessagesProj_AppStandalone:optimizeAfatStandaloneResources
+
+> Task :TMessagesProj:compileStandaloneJavaWithJavac
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+3 warnings
+
+> Task :TMessagesProj:mergeStandaloneGeneratedProguardFiles UP-TO-DATE
+> Task :TMessagesProj:exportStandaloneConsumerProguardFiles UP-TO-DATE
+> Task :TMessagesProj:bundleLibCompileToJarStandalone
+
+> Task :TMessagesProj_AppStandalone:compileAfatStandaloneJavaWithJavac
+Java compiler version 21 has deprecated support for compiling with source/target version 8.
+Try one of the following options:
+    1. [Recommended] Use Java toolchain with a lower language version
+    2. Set a higher source/target version
+    3. Use a lower version of the JDK running the build (if you're not using Java toolchain)
+For more details on how to configure these settings, see https://developer.android.com/build/jdks.
+To suppress this warning, set android.javaCompile.suppressSourceTargetDeprecationWarning=true in gradle.properties.
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: /root/staticgram-client/TMessagesProj_AppStandalone/src/main/java/org/telegram/ui/SMSStatsActivity.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+3 warnings
+
+> Task :TMessagesProj_AppStandalone:mergeAfatStandaloneGeneratedProguardFiles UP-TO-DATE
+> Task :TMessagesProj:minifyStandaloneWithR8
+> Task :TMessagesProj:bundleLibRuntimeToJarStandalone
+> Task :TMessagesProj_AppStandalone:expandAfatStandaloneArtProfileWildcards
+> Task :TMessagesProj_AppStandalone:minifyAfatStandaloneWithR8
+> Task :TMessagesProj_AppStandalone:l8DexDesugarLibAfatStandalone
+> Task :TMessagesProj_AppStandalone:compileAfatStandaloneArtProfile
+> Task :TMessagesProj_AppStandalone:packageAfatStandalone
+> Task :TMessagesProj_AppStandalone:createAfatStandaloneApkListingFileRedirect
+> Task :TMessagesProj_AppStandalone:assembleAfatStandalone
+[Incubating] Problems report is available at: file:///root/staticgram-client/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 7m 40s
+105 actionable tasks: 38 executed, 67 up-to-date

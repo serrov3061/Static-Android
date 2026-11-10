@@ -1,0 +1,65 @@
+{
+ "version": 2,
+ "plugins": [
+  {
+   "id": "zwylib",
+   "file": "zwylib.plugin",
+   "version": "2.0.11",
+   "icon": "msg_plugins",
+   "name": "ZwyLib",
+   "name_ru": "ZwyLib",
+   "description": "Shared library some plugins need · by @zwylair",
+   "description_ru": "Библиотека, которая нужна некоторым плагинам · автор @zwylair"
+  },
+  {
+   "id": "bot_login",
+   "file": "bot_login.plugin",
+   "version": "1.5",
+   "icon": "msg_bot",
+   "name": "Bot Login",
+   "name_ru": "Вход в бота",
+   "description": "Log in to bot accounts with their API token · by @kvucoPlugins",
+   "description_ru": "Вход в аккаунты ботов по API-токену · автор @kvucoPlugins"
+  },
+  {
+   "id": "compact_bottom_nav",
+   "file": "compact_bottom_nav.plugin",
+   "version": "1.0.0",
+   "icon": "msg_list",
+   "name": "Compact Bottom Nav",
+   "name_ru": "Компактная нижняя панель",
+   "description": "Bottom bar without labels and with a floating search button · by @YouRooni",
+   "description_ru": "Нижняя панель без подписей и с плавающей кнопкой поиска · автор @YouRooni"
+  },
+  {
+   "id": "hirez_photo",
+   "file": "hirez_photo.plugin",
+   "version": "1.1",
+   "icon": "msg_photos",
+   "name": "HiRez Photo",
+   "name_ru": "Фото в высоком качестве",
+   "description": "HD button sends photos at full resolution (4080px) as a normal photo · by @dekma0091",
+   "description_ru": "Кнопка HD отправляет фото в полном разрешении (4080px) обычным фото · автор @dekma0091"
+  },
+  {
+   "id": "modular_sections",
+   "file": "modular_sections.plugin",
+   "version": "1.0.0",
+   "icon": "msg_theme",
+   "name": "Modular Sections",
+   "name_ru": "Модульные секции",
+   "description": "Turns interface elements into Material 3 modular sections · by @RnPlugins",
+   "description_ru": "Превращает элементы интерфейса в модульные секции Material 3 · автор @RnPlugins"
+  },
+  {
+   "id": "text_animation",
+   "file": "text_animation.plugin",
+   "version": "10.0",
+   "icon": "msg_edit",
+   "name": "Text Animation",
+   "name_ru": "Анимация текста",
+   "description": "Typing comes alive: letters fade in, the cursor glides, erased characters scatter · by @mihailkotovski & @mishabotov",
+   "description_ru": "Оживляет набор текста: буквы мягко появляются, курсор плывёт, стёртые символы рассыпаются · автор @mihailkotovski & @mishabotov"
+  }
+ ]
+}

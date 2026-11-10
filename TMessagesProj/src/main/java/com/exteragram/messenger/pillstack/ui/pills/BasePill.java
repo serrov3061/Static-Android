@@ -1,0 +1,206 @@
+package com.exteragram.messenger.pillstack.ui.pills;
+
+import android.animation.TimeInterpolator;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
+import android.os.SystemClock;
+import android.transition.ChangeBounds;
+import android.transition.TransitionManager;
+import android.transition.TransitionSet;
+import android.util.SparseArray;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+
+import com.exteragram.messenger.pillstack.core.PillStackConfig;
+
+import org.telegram.messenger.LocaleController;
+import org.telegram.ui.ActionBar.Theme;
+import org.telegram.ui.Components.CubicBezierInterpolator;
+import org.telegram.ui.Components.LoadingDrawable;
+
+/** exteraGram: base view of a pill in the dialogs search field (auto refresh, loading shimmer). */
+public abstract class BasePill extends FrameLayout {
+
+    private static final SparseArray<Long> globalLastUpdateTimes = new SparseArray<>();
+    private final Runnable autoRefreshRunnable;
+    protected boolean loading;
+    protected LoadingDrawable loadingDrawable;
+    protected View loadingTargetView;
+    private final RectF rectF = new RectF();
+    protected Theme.ResourcesProvider resourcesProvider;
+    private boolean stackVisible = true;
+
+    public abstract int getPillId();
+
+    public abstract long getRefreshInterval();
+
+    public abstract void onPillClicked();
+
+    public abstract boolean onPillLongClicked();
+
+    public void onPillSelected() {
+    }
+
+    public void onPillUnselected() {
+    }
+
+    public abstract void onUpdateData(boolean force);
+
+    public abstract void updateColors();
+
+    public BasePill(Context context, Theme.ResourcesProvider resourcesProvider) {
+        super(context);
+        this.autoRefreshRunnable = () -> {
+            onUpdateData(false);
+            scheduleNextUpdate();
+        };
+        this.resourcesProvider = resourcesProvider;
+        setLayoutParams(new FrameLayout.LayoutParams(-2, -2, (LocaleController.isRTL ? Gravity.LEFT : Gravity.RIGHT) | Gravity.CENTER_VERTICAL));
+        setClipChildren(false);
+        setClipToPadding(false);
+    }
+
+    private void scheduleNextUpdate() {
+        removeCallbacks(autoRefreshRunnable);
+        if (stackVisible) {
+            long interval = getRefreshInterval();
+            if (interval > 0) {
+                postDelayed(autoRefreshRunnable, interval);
+            }
+        }
+    }
+
+    public boolean isRefreshDue() {
+        long interval = getRefreshInterval();
+        if (interval <= 0) {
+            return true;
+        }
+        long last = globalLastUpdateTimes.get(getPillId(), 0L);
+        return last == 0 || SystemClock.elapsedRealtime() - last >= interval;
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        long interval = getRefreshInterval();
+        if (interval <= 0) {
+            return;
+        }
+        if (PillStackConfig.checkAndClearPendingUpdate(getPillId())) {
+            onUpdateData(true);
+            scheduleNextUpdate();
+        } else if (stackVisible) {
+            long now = SystemClock.elapsedRealtime();
+            long last = globalLastUpdateTimes.get(getPillId(), 0L);
+            if (last != 0) {
+                long passed = now - last;
+                if (passed < interval) {
+                    postDelayed(autoRefreshRunnable, interval - passed);
+                    return;
+                }
+            }
+            autoRefreshRunnable.run();
+        }
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        removeCallbacks(autoRefreshRunnable);
+    }
+
+    public void onStackVisibilityChanged(boolean visible) {
+        if (stackVisible == visible) {
+            return;
+        }
+        stackVisible = visible;
+        if (visible) {
+            if (getRefreshInterval() <= 0 || !isAttachedToWindow()) {
+                return;
+            }
+            if (isRefreshDue()) {
+                onUpdateData(false);
+            }
+            scheduleNextUpdate();
+            return;
+        }
+        removeCallbacks(autoRefreshRunnable);
+    }
+
+    public void markDataUpdated() {
+        globalLastUpdateTimes.put(getPillId(), SystemClock.elapsedRealtime());
+        scheduleNextUpdate();
+    }
+
+    public void setLoadingTargetView(View view) {
+        loadingTargetView = view;
+    }
+
+    public void startLoading() {
+        loading = true;
+        if (loadingDrawable == null) {
+            loadingDrawable = new LoadingDrawable(resourcesProvider);
+            loadingDrawable.setCallback(this);
+            loadingDrawable.setGradientScale(2.0f);
+            loadingDrawable.setRadiiDp(14.0f);
+            updateLoadingColors();
+        }
+        loadingDrawable.reset();
+        loadingDrawable.resetDisappear();
+        loadingDrawable.setAlpha(255);
+        invalidate();
+    }
+
+    public void animateSizeChange() {
+        if (isLaidOut() && getVisibility() == VISIBLE && getParent() != null && getParent().getParent() instanceof ViewGroup) {
+            TransitionManager.beginDelayedTransition((ViewGroup) getParent().getParent(), new TransitionSet().addTransition(new ChangeBounds()).setDuration(300L).setInterpolator((TimeInterpolator) CubicBezierInterpolator.EASE_OUT_QUINT));
+        }
+    }
+
+    public void stopLoading() {
+        loading = false;
+        if (loadingDrawable != null) {
+            loadingDrawable.disappear();
+        }
+    }
+
+    public void updateLoadingColors() {
+        if (loadingDrawable != null) {
+            int color = Theme.getColor(Theme.key_windowBackgroundWhiteBlackText, resourcesProvider);
+            loadingDrawable.setColors(Theme.multAlpha(color, 0.05f), Theme.multAlpha(color, 0.15f), Theme.multAlpha(color, 0.1f), Theme.multAlpha(color, 0.25f));
+        }
+    }
+
+    public int getThemedColor(int key) {
+        return Theme.getColor(key, resourcesProvider);
+    }
+
+    public int getThemedColor(int key, float alpha) {
+        return Theme.multAlpha(getThemedColor(key), alpha);
+    }
+
+    @Override
+    protected void dispatchDraw(Canvas canvas) {
+        super.dispatchDraw(canvas);
+        if (loadingDrawable != null && (loadingDrawable.getAlpha() > 0 || !loadingDrawable.isDisappearing())) {
+            View view = loadingTargetView != null ? loadingTargetView : this;
+            rectF.set(view.getLeft(), view.getTop(), view.getRight(), view.getBottom());
+            if (loadingDrawable.stroke) {
+                float inset = loadingDrawable.strokePaint.getStrokeWidth() / 2.0f;
+                rectF.inset(inset, inset);
+            }
+            loadingDrawable.setBounds(rectF);
+            loadingDrawable.draw(canvas);
+            invalidate();
+        }
+    }
+
+    @Override
+    protected boolean verifyDrawable(Drawable who) {
+        return who == loadingDrawable || super.verifyDrawable(who);
+    }
+}

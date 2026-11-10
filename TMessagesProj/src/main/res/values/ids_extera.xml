@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <id name="menu_markdown" />
+    <id name="menu_bold_italic" />
+    <id name="menu_code" />
+</resources>

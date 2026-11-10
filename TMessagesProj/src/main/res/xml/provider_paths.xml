@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-path name="media" path="."/>
+    <files-path name="logs" path="/logs/"/>
+    <files-path name="cache" path="/cache/"/>
+    <files-path name="temp" path="/temp/"/> <!-- exteraGram plugins: share a plugin file -->
+    <cache-path name="shared_packs" path="shared_packs/" /> <!-- exteraGram icon packs: share a .icons archive -->
+    <root-path name="external_files" path="/storage/" />
+</paths>

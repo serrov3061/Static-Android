@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- StaticGram: pre-Android-12 launch background (white). Plain on purpose: the logo is drawn by
+     StaticGramLaunchSplash (plane lands into the gem), the starting window only holds the color. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@android:color/white" />
+</layer-list>

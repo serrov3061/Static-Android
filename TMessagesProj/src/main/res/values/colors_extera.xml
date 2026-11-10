@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- exteraGram 12.10.6 colors needed by ported resources (see EXTERA_PORT.md) -->
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <!-- Monet themes: fixed red/green, harmonized to the system accent at runtime (MonetUtils) -->
+    <color name="mRed200">#ffef9a9a</color>
+    <color name="mRed500">#fff44336</color>
+    <color name="mRed800">#ffc62828</color>
+    <color name="mGreen200">#ffa5d6a7</color>
+    <color name="mGreen500">#ff4caf50</color>
+    <color name="mGreen800">#ff2e7d32</color>
+    <color name="ic_background_monet">#ffd9e2ff</color>
+    <color name="ic_foreground_monet">#ff3e5f90</color>
+    <color name="ic_background_static_light">#ffffffff</color>
+    <!-- exteraGram 13.1.1 app icons (Orbit, Sus, Cyberpunk adaptive backgrounds) -->
+    <color name="ic_background">#ffe83030</color>
+    <color name="ic_background_sus">#ffffde2a</color>
+    <color name="ic_background_cyberpunk">#ff0c0e15</color>
+</resources>

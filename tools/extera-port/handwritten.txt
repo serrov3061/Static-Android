@@ -1,0 +1,3 @@
+preferences/SwitchGroup.java
+preferences/BasePreferencesActivity.java
+preferences/utils/SettingsRegistry.java
