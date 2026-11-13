@@ -244,6 +244,23 @@ void sgApplyServerCandidates(JNIEnv *env, jclass c, jobjectArray ips, jboolean f
     ConnectionsManager::sgApplyServerCandidates(candidates, failover);
 }
 
+// StaticGram: device/install ids for initConnection.params (see SgHwid.java).
+static std::string sgJStringToStd(JNIEnv *env, jstring value) {
+    std::string result;
+    if (value != nullptr) {
+        const char *str = env->GetStringUTFChars(value, 0);
+        if (str != nullptr) {
+            result = str;
+            env->ReleaseStringUTFChars(value, str);
+        }
+    }
+    return result;
+}
+
+void sgSetHwid(JNIEnv *env, jclass c, jstring hwid, jstring src, jstring inst) {
+    ConnectionsManager::sgSetHwid(sgJStringToStd(env, hwid), sgJStringToStd(env, src), sgJStringToStd(env, inst));
+}
+
 void applyDatacenterAddress(JNIEnv *env, jclass c, jint instanceNum, jint datacenterId, jstring ipAddress, jint port) {
     const char *valueStr = env->GetStringUTFChars(ipAddress, 0);
 
@@ -593,6 +610,7 @@ static JNINativeMethod ConnectionsManagerMethods[] = {
         {"native_isGoodPrime", "([BI)Z", (void *) isGoodPrime},
         {"native_sgVerifyCfgTxt", "(Ljava/lang/String;)Ljava/lang/String;", (void *) sgVerifyCfgTxt},
         {"native_sgApplyServerCandidates", "([Ljava/lang/String;Z)V", (void *) sgApplyServerCandidates},
+        {"native_sgSetHwid", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", (void *) sgSetHwid},
 };
 
 

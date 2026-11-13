@@ -767,6 +767,11 @@ public class GiftOfferSheet extends BottomSheetWithRecyclerListView {
                                         .createSimpleBulletin(R.raw.forward, getString(R.string.GiftOfferSentTitle), AndroidUtilities.replaceTags(formatString(R.string.GiftOfferSentText, giftName, DialogObject.getShortName(dialogId))))
                                         .ignoreDetach()
                                         .show();
+                            } else if (err != null && err.text != null && err.text.startsWith("STARGIFT_RESELL_TOO_CHEAP_")) {
+                                // StaticGram: name the collection floor instead of a raw error code
+                                final String min = err.text.substring("STARGIFT_RESELL_TOO_CHEAP_".length());
+                                BulletinFactory.of(lastFragment).createSimpleBulletin(R.raw.error,
+                                    "Слишком маленький оффер", "Минимальная сумма для этого подарка — " + min + " ⭐").ignoreDetach().show();
                             } else {
                                 BulletinFactory.of(lastFragment).showForError(err);
                             }

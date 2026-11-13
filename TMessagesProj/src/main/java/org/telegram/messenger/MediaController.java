@@ -640,10 +640,15 @@ public class MediaController implements AudioManager.OnAudioFocusChangeListener,
             if (parsedXmp) return isLivePhoto;
             synchronized (this) {
                 if (!parsedXmp) {
-                    if (!isVideo) {
-                        parseXmp();
+                    try {
+                        if (!isVideo) {
+                            parseXmp();
+                        }
+                    } catch (Throwable e) {
+                        FileLog.e(e); // StaticGram: an unreadable file is simply not a live photo
+                    } finally {
+                        parsedXmp = true;
                     }
-                    parsedXmp = true;
                 }
             }
             return isLivePhoto;
@@ -4013,6 +4018,9 @@ public class MediaController implements AudioManager.OnAudioFocusChangeListener,
             }
             try {
                 audioPlayer = new VideoPlayer();
+                if (messageObject.isMusic()) {
+                    audioPlayer.enableProfileMusicPulse();
+                }
                 int tag = ++playerNum;
                 audioPlayer.setDelegate(new VideoPlayer.VideoPlayerDelegate() {
                     @Override

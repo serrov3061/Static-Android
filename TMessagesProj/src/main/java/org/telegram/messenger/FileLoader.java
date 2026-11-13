@@ -828,6 +828,19 @@ public class FileLoader extends BaseController {
     }
 
 
+    // StaticGram: auto-downloaded videos/files (>= 1 MB) also light up the
+    // downloads progress icon in the chat list, not only manually tapped ones.
+    private static boolean sgTrackAutoDownload(MessageObject messageObject, TLRPC.Document document) {
+        if (document.size < 1024 * 1024 || messageObject.isVoice() || messageObject.isRoundVideo() || messageObject.isGif()
+                || messageObject.isAnimatedEmoji() || messageObject.getDocument() == null || messageObject.getDocument().id != document.id) {
+            return false;
+        }
+        if (!messageObject.putInDownloadsStore) {
+            messageObject.sgAutoDownload = true;
+        }
+        return true;
+    }
+
     private FileLoadOperation loadFileInternal(final TLRPC.Document document, final SecureDocument secureDocument, final WebFile webDocument, TLRPC.TL_fileLocationToBeDeprecated location, final ImageLocation imageLocation, Object parentObject, final String locationExt, final long locationSize, int priority, FileLoadOperationStream stream, final long streamOffset, boolean streamPriority, final int cacheType) {
         String fileName;
         if (location != null) {
@@ -852,7 +865,7 @@ public class FileLoader extends BaseController {
             loadOperationPathsUI.put(fileName, new LoadOperationUIObject());
         }
 
-        if (document != null && parentObject instanceof MessageObject && ((MessageObject) parentObject).putInDownloadsStore && !((MessageObject) parentObject).isAnyKindOfSticker()) {
+        if (document != null && parentObject instanceof MessageObject && (((MessageObject) parentObject).putInDownloadsStore || sgTrackAutoDownload((MessageObject) parentObject, document)) && !((MessageObject) parentObject).isAnyKindOfSticker()) {
             getDownloadController().startDownloadFile(document, (MessageObject) parentObject);
         }
 

@@ -300,7 +300,16 @@ public class BitmapsCache {
                 int finalFramePosition = framePosition;
                 RandomAccessFile finalRandomAccessFile1 = randomAccessFile;
                 bitmapCompressExecutor.execute(() -> {
+                    // StaticGram: always release the latch (an early return or a throw left the
+                    // generator waiting forever) and never compress a bitmap recycled under us
+                    // (crash "Can't compress a recycled bitmap", 71929).
+                    try {
                     if (cancelled.get() || closed.get()) {
+                        return;
+                    }
+                    final Bitmap frame = bitmap[finalIndex];
+                    if (frame == null || frame.isRecycled()) {
+                        closed.set(true);
                         return;
                     }
 
@@ -308,7 +317,12 @@ public class BitmapsCache {
                     if (Build.VERSION.SDK_INT <= 28) {
                         format = Bitmap.CompressFormat.PNG;
                     }
-                    bitmap[finalIndex].compress(format, compressQuality, byteArrayOutputStream[finalIndex]);
+                    try {
+                        frame.compress(format, compressQuality, byteArrayOutputStream[finalIndex]);
+                    } catch (IllegalStateException e) {
+                        closed.set(true);
+                        return;
+                    }
                     int size = byteArrayOutputStream[finalIndex].count;
 
                     try {
@@ -331,8 +345,9 @@ public class BitmapsCache {
                             closed.set(true);
                         }
                     }
-
-                    countDownLatch[finalIndex].countDown();
+                    } finally {
+                        countDownLatch[finalIndex].countDown();
+                    }
                 });
 
                 index++;

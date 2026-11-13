@@ -33,7 +33,7 @@ public class SGTonDns {
     /** Media of a live domain: 1000×1000 card rendered by the server. */
     private static final String MEDIA_URL = "https://fragment.staticgram.top/api/nft/item/domain/%s/media.png?v=v3";
     private static final int MAX_BATCH = 200;
-    private static final long NEGATIVE_TTL_MS = 5 * 60 * 1000L;
+    private static final long NEGATIVE_TTL_MS = 60 * 1000L; // StaticGram: a freshly set primary domain shows up within a minute
 
     private static final SGTonDns[] instances = new SGTonDns[UserConfig.MAX_ACCOUNT_COUNT];
 

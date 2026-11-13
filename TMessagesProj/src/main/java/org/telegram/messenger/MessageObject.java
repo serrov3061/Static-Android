@@ -219,6 +219,7 @@ public class MessageObject {
     public boolean isStoryPush, isStoryMentionPush, isStoryPushHidden, isLiveStoryPush;
     public boolean isOauthPush;
     public boolean putInDownloadsStore;
+    public boolean sgAutoDownload; // StaticGram: tracked only for the progress icon, not "unviewed"
     public boolean isDownloadingFile;
     public boolean forcePlayEffect;
     private int isRoundVideoCached;

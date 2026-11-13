@@ -1284,7 +1284,9 @@ public class AnimatedEmojiDrawable extends Drawable {
             bounds.set(getBounds());
             bounds.offset(offsetX, offsetY);
             final float particlesAlpha = this.particlesAlpha.set(hasParticles);
-            if (particlesAlpha > 0) {
+            // StaticGram (perf): every badge (lists, chat names) has particles. With particles off in power
+            // saving they draw nothing, so do not keep redrawing the host view at 15 fps for them either.
+            if (particlesAlpha > 0 && particles != null && LiteMode.isEnabled(LiteMode.FLAG_PARTICLES)) {
                 particles.setBounds(bounds);
                 particles.process();
                 particles.draw(canvas, Theme.multAlpha(lastColor == null ? 0xFFFFFFFF : lastColor, particlesAlpha));

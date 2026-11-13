@@ -258,7 +258,7 @@ public class ProfileWalletCardDialog extends Dialog {
                 afterDismiss = () -> WalletActivity.openWalletHowItWorksAlert(fragment.getContext(), fragment.getResourceProvider());
             } else {
                 if (!showSendMoney || TextUtils.isEmpty(profileCard.address)) return;
-                afterDismiss = () -> fragment.presentFragment(new WalletSendEnterAmount(fragment.getCurrentAccount(), profileCard.address));
+                afterDismiss = () -> SGCards.sendGram(fragment, null, profileCard.address, null);
             }
             dismiss();
         });

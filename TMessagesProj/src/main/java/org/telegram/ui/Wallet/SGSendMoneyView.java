@@ -497,6 +497,17 @@ public class SGSendMoneyView extends LinearLayout {
         AndroidUtilities.showKeyboard(addressEdit);
     }
 
+    /** Prefills «На адрес» with a wallet address or name.ton (e.g. «Send» again from a transaction). */
+    public void setAddress(String address) {
+        if (addressEdit == null || TextUtils.isEmpty(address)) return;
+        addressEdit.setText(address.trim());
+        addressEdit.setSelection(addressEdit.length());
+    }
+
+    public boolean hasAddressText() {
+        return addressEdit != null && addressEdit.length() > 0;
+    }
+
     /** The entry point already chose the currency (a GRAM or Stars card): no switch, the currency is fixed. */
     public void lockKind() {
         tabs.setVisibility(GONE);

@@ -774,7 +774,6 @@ public class ActionBarLayout extends FrameLayout implements INavigationLayout, F
     private View backgroundView;
     private boolean removeActionBarExtraHeight;
     private Runnable animationRunnable;
-    private Paint sgUnderlayPaint;
 
     private float animationProgress;
     private long lastFrameTime;
@@ -1174,6 +1173,13 @@ public class ActionBarLayout extends FrameLayout implements INavigationLayout, F
 
     @Override
     protected void dispatchDraw(@NonNull Canvas canvas) {
+        if (!isLayersLayout && !inPreviewMode && !transitionAnimationPreviewMode) {
+            // StaticGram: the activity window background is empty (ActivityWindowEmptyBackgroundDrawable),
+            // so any pixel no screen covers in a frame (a sliding/fading screen, a chat whose wallpaper is
+            // not drawn yet, a tab switch) kept the previous frame: copies of the profile side by side,
+            // smeared lists ("shake"). Clear the whole layout with the theme background every frame.
+            canvas.drawColor(Theme.getColor(Theme.key_windowBackgroundWhite));
+        }
         if (bottomSheetTabs != null && getBottomTabsHeight(true) > 0) {
             canvas.drawRect(0, getHeight() - (systemAndDisplayInsets.bottom + bottomSheetTabs.getMeasuredHeight()),
                     getWidth(), getHeight(), bottomSheetTabs.getBackgroundPaint());
@@ -1304,19 +1310,6 @@ public class ActionBarLayout extends FrameLayout implements INavigationLayout, F
         }
         if ((inPreviewMode || transitionAnimationPreviewMode) && child == containerView) {
             drawPreviewDrawables(canvas, containerView);
-        }
-        if (!inPreviewMode && !transitionAnimationPreviewMode && (child == containerView || child == containerViewBack)
-                && (transitionAnimationInProgress || animationInProgress || startedTracking || predictiveBackInProgress)
-                && child.getVisibility() == VISIBLE && child.getAlpha() > 0) {
-            // StaticGram: some screens (exteraGram settings among them) have no own background and
-            // rely on the window; while one moves over another the screen below showed through it
-            if (sgUnderlayPaint == null) {
-                sgUnderlayPaint = new Paint();
-            }
-            sgUnderlayPaint.setColor(Theme.getColor(Theme.key_windowBackgroundGray));
-            sgUnderlayPaint.setAlpha((int) (255 * child.getAlpha()));
-            final float tx = child.getTranslationX();
-            canvas.drawRect(child.getLeft() + tx, child.getTop(), child.getRight() + tx, child.getBottom(), sgUnderlayPaint);
         }
         final boolean result = super.drawChild(canvas, child, drawingTime);
         canvas.restoreToCount(restoreCount);
@@ -1918,6 +1911,30 @@ public class ActionBarLayout extends FrameLayout implements INavigationLayout, F
                         velocityTracker = null;
                     }
                 } else if (ev == null) {
+                    if (startedTracking && !animationInProgress && containerView != null) {
+                        // StaticGram ("shake"): a child asked to stop interception (requestDisallowInterceptTouchEvent,
+                        // e.g. on the CANCEL it got when the swipe took over) while the swipe-back was already
+                        // running. The swipe used to be dropped half way: the previous screen stayed attached,
+                        // visible and resumed under this one, this screen stayed shifted/scaled in a hardware
+                        // layer, and the chat list showed through the chat with stale frames. Finish it as a
+                        // cancelled swipe instead, like a release would (onSlideAnimationEnd cleans it all up).
+                        final float w = containerView.getMeasuredWidth();
+                        if (exteraSwipeSpring && !newBackTransitions() && w > 0) {
+                            exteraSpringLayout = false;
+                            exteraSpringBack = true;
+                            startExteraSpring(containerView.getX() / w * 1000.0f, 0, 0);
+                            animationInProgress = true;
+                            layoutToIgnore = containerViewBack;
+                        } else {
+                            animateBackEndAnimation(true);
+                        }
+                        maybeStartTracking = false;
+                        if (velocityTracker != null) {
+                            velocityTracker.recycle();
+                            velocityTracker = null;
+                        }
+                        return startedTracking;
+                    }
                     if (exteraSwipeSpring && !animationInProgress) { // exteraGram
                         resetExteraSwipe();
                     }
@@ -2419,13 +2436,11 @@ public class ActionBarLayout extends FrameLayout implements INavigationLayout, F
                 long dt = newTime - lastFrameTime;
                 if (dt > 40 && first) {
                     dt = 0;
-                } else if (!aosp && preview && dt > 18) {
+                } else if (dt > 18 && !aosp) {
                     dt = 18;
-                } else if (!aosp && dt > 34) { // StaticGram: a full-width slide must not crawl and then jump after a dropped frame
-                    dt = 34;
                 }
                 lastFrameTime = newTime;
-                float duration = aosp ? exteraAospDuration /* exteraGram */ : preview && open ? 190.0f : preview ? 150.0f : 250.0f; // StaticGram: a full-width slide needs a bit longer than the 48dp nudge
+                float duration = aosp ? exteraAospDuration /* exteraGram */ : preview && open ? 190.0f : 150.0f;
                 animationProgress += dt / duration;
                 if (animationProgress > 1.0f) {
                     animationProgress = 1.0f;
@@ -2470,16 +2485,14 @@ public class ActionBarLayout extends FrameLayout implements INavigationLayout, F
                         interpolated = CubicBezierInterpolator.EASE_OUT_QUINT.getInterpolation(animationProgress);
                     }
                 } else {
-                    interpolated = SLIDE_INTERPOLATOR.getInterpolation(animationProgress); // StaticGram: gentle start for the full-width slide
+                    interpolated = decelerateInterpolator.getInterpolation(animationProgress);
                 }
                 if (aosp) { // exteraGram
                     com.exteragram.messenger.utils.ui.WindowTransitionAnimationHelper.apply(containerView, containerViewBack, open, interpolated);
                     invalidate();
                 } else if (open) {
                     float clampedInterpolated = MathUtils.clamp(interpolated, 0, 1);
-                    // StaticGram: a pushed screen slides in opaque from the right edge; the Telegram
-                    // fade-in let the list behind show through the chat for the first frames
-                    containerView.setAlpha(preview ? clampedInterpolated : 1.0f);
+                    containerView.setAlpha(clampedInterpolated);
                     if (preview) {
                         containerView.setScaleX(0.7f + 0.3f * interpolated);
                         containerView.setScaleY(0.7f + 0.3f * interpolated);
@@ -2494,11 +2507,11 @@ public class ActionBarLayout extends FrameLayout implements INavigationLayout, F
                         containerView.invalidate();
                         invalidate();
                     } else {
-                        containerView.setTranslationX(containerView.getMeasuredWidth() * (1.0f - interpolated)); // StaticGram: full-width slide
+                        containerView.setTranslationX(dp(48) * (1.0f - interpolated));
                     }
                 } else {
                     float clampedReverseInterpolated = MathUtils.clamp(1f - interpolated, 0, 1);
-                    containerViewBack.setAlpha(preview ? clampedReverseInterpolated : 1.0f); // StaticGram: slides out opaque
+                    containerViewBack.setAlpha(clampedReverseInterpolated);
                     if (preview) {
                         containerViewBack.setScaleX(0.9f + 0.1f * (1.0f - interpolated));
                         containerViewBack.setScaleY(0.9f + 0.1f * (1.0f - interpolated));
@@ -2509,7 +2522,7 @@ public class ActionBarLayout extends FrameLayout implements INavigationLayout, F
                         containerView.invalidate();
                         invalidate();
                     } else {
-                        containerViewBack.setTranslationX(containerViewBack.getMeasuredWidth() * interpolated); // StaticGram: full-width slide
+                        containerViewBack.setTranslationX(dp(48) * interpolated);
                     }
                 }
                 if (animationProgress < 1) {
@@ -2520,27 +2533,14 @@ public class ActionBarLayout extends FrameLayout implements INavigationLayout, F
             }
         };
         // StaticGram: step on vsync (Choreographer) instead of a Handler post, otherwise the
-        // full-width slide advances in uneven steps on 90/120 Hz screens and visibly judders
-        if (first && !aosp && !preview) {
-            // StaticGram: let the new screen do its first (often heavy, 100-250 ms) layout and draw
-            // while it is still off-screen, and only then start moving it; otherwise that stall
-            // freezes the slide in the middle of the screen
-            final android.view.Choreographer ch = android.view.Choreographer.getInstance();
-            ch.postFrameCallback(f1 -> ch.postFrameCallback(f2 -> {
-                if (animationRunnable != stepRunnable) {
-                    return;
-                }
-                lastFrameTime = System.nanoTime() / 1000000;
-                stepRunnable.run();
-            }));
-        } else if (first) {
+        // animation advances in uneven steps on 90/120 Hz screens
+        if (first) {
             AndroidUtilities.runOnUIThread(stepRunnable);
         } else {
             android.view.Choreographer.getInstance().postFrameCallback(frameTimeNanos -> stepRunnable.run());
         }
     }
 
-    private static final CubicBezierInterpolator SLIDE_INTERPOLATOR = new CubicBezierInterpolator(0.25, 0.46, 0.45, 0.94);
 
     @Override
     public void resumeDelayedFragmentAnimation() {
@@ -2839,13 +2839,13 @@ public class ActionBarLayout extends FrameLayout implements INavigationLayout, F
                     animation = fragment.onCustomTransitionAnimation(true, () -> onAnimationEndCheck(false));
                 }
                 if (animation == null) {
-                    containerView.setAlpha(preview ? 0.0f : 1.0f); // StaticGram: opaque slide-in
+                    containerView.setAlpha(0.0f);
                     if (preview) {
                         containerView.setTranslationX(0.0f);
                         containerView.setScaleX(0.9f);
                         containerView.setScaleY(0.9f);
                     } else {
-                        containerView.setTranslationX(containerView.getMeasuredWidth() > 0 ? containerView.getMeasuredWidth() : getMeasuredWidth()); // StaticGram: starts off-screen
+                        containerView.setTranslationX(48.0f);
                         containerView.setScaleX(1.0f);
                         containerView.setScaleY(1.0f);
                     }

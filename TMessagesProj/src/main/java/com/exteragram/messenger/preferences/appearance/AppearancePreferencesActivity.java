@@ -195,6 +195,14 @@ public final class AppearancePreferencesActivity extends BasePreferencesActivity
                 iArr[AppearanceItem.GLASS_MESSAGE_MENU.ordinal()] = 32;
             } catch (NoSuchFieldError unused32) {
             }
+            try { // StaticGram cover-colored music player
+                iArr[AppearanceItem.MUSIC_PLAYER.ordinal()] = 33;
+            } catch (NoSuchFieldError ignored) {
+            }
+            try { // StaticGram profile gift bubbles
+                iArr[AppearanceItem.PROFILE_GIFT_BUBBLES.ordinal()] = 34;
+            } catch (NoSuchFieldError ignored) {
+            }
             $EnumSwitchMapping$0 = iArr;
         }
     }
@@ -273,7 +281,9 @@ public final class AppearancePreferencesActivity extends BasePreferencesActivity
         NEW_NAVIGATION_BAR_STYLE,
         NEW_FAB_STYLE,
         NEW_PLAYER_STYLE,
-        NEW_PROFILE_ACTIONS_STYLE;
+        NEW_PROFILE_ACTIONS_STYLE,
+        MUSIC_PLAYER,
+        PROFILE_GIFT_BUBBLES;
 
         public static java.util.List<AppearanceItem> getEntries() {
             return java.util.Arrays.asList(values());
@@ -397,6 +407,12 @@ public final class AppearancePreferencesActivity extends BasePreferencesActivity
         items.add(BasePreferencesActivity.uCheck$TMessagesProj$default((BasePreferencesActivity) this, (Enum) AppearanceItem.GLASS_MESSAGE_MENU, (CharSequence) LocaleController.getString(R.string.GlassMessageMenu), ExteraConfig.getGlassMessageMenu(), (CharSequence) LocaleController.getString(R.string.GlassMessageMenuInfo), 0, false, "glassMessageMenu", false, 0, 432, (Object) null));
         items.add(BasePreferencesActivity.uCheck$TMessagesProj$default((BasePreferencesActivity) this, (Enum) AppearanceItem.FORCE_BLUR, (CharSequence) LocaleController.getString(R.string.ForceBlur), ExteraConfig.getForceBlur(), (CharSequence) null, 0, false, "forceBlur", false, 0, 440, (Object) null));
         items.add(UItem.asShadow(LocaleController.getString(R.string.ForceBlurInfo)));
+        items.add(UItem.asHeader(LocaleController.getString(R.string.SgMusicPlayerHeader)));
+        items.add(BasePreferencesActivity.uCheck$TMessagesProj$default((BasePreferencesActivity) this, (Enum) AppearanceItem.MUSIC_PLAYER, (CharSequence) LocaleController.getString(R.string.SgMusicPlayerSetting), org.telegram.ui.music.MusicPlayerConfig.isPlayerEnabled(), (CharSequence) null, 0, false, "musicPlayer", false, 0, 440, (Object) null));
+        items.add(UItem.asShadow(LocaleController.getString(R.string.SgMusicPlayerSettingInfo)));
+        items.add(UItem.asHeader(LocaleController.getString(R.string.SgProfileHeader)));
+        items.add(BasePreferencesActivity.uCheck$TMessagesProj$default((BasePreferencesActivity) this, (Enum) AppearanceItem.PROFILE_GIFT_BUBBLES, (CharSequence) LocaleController.getString(R.string.SgProfileGiftBubbles), org.telegram.ui.music.MusicPlayerConfig.isProfileGiftBubbles(), (CharSequence) null, 0, false, "profileGiftBubbles", false, 0, 440, (Object) null));
+        items.add(UItem.asShadow(LocaleController.getString(R.string.SgProfileGiftBubblesInfo)));
     }
 
     /* renamed from: $r8$lambda$BroMj8zTOlcCXqcxN3abB-0FVwI, reason: not valid java name */
@@ -647,6 +663,12 @@ public final class AppearancePreferencesActivity extends BasePreferencesActivity
                     }
                 });
                 handleGlassMessageMenuChange();
+                break;
+            case 33:
+                toggleBooleanSettingAndRefresh$TMessagesProj(item, value -> org.telegram.ui.music.MusicPlayerConfig.setPlayerEnabled(value));
+                break;
+            case 34:
+                toggleBooleanSettingAndRefresh$TMessagesProj(item, value -> org.telegram.ui.music.MusicPlayerConfig.setProfileGiftBubbles(value));
                 break;
         }
     }

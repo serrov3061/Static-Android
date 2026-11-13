@@ -1439,6 +1439,7 @@ public class FragmentContextView extends FrameLayout implements NotificationCent
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+        org.telegram.ui.music.MusicCoverColors.removeListener(coverColorsChanged);
         if (animatorSet != null) {
             animatorSet.cancel();
             animatorSet = null;
@@ -1488,6 +1489,7 @@ public class FragmentContextView extends FrameLayout implements NotificationCent
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
+        org.telegram.ui.music.MusicCoverColors.addListener(coverColorsChanged);
         removeObservers();
 
         if (isLocation) {
@@ -2022,6 +2024,7 @@ public class FragmentContextView extends FrameLayout implements NotificationCent
             }
             if (lastMessageObject != messageObject || prevStyle != STYLE_AUDIO_PLAYER) {
                 lastMessageObject = messageObject;
+                org.telegram.ui.music.MusicCoverColors.track(messageObject); // StaticGram music player: cover colors for the mini player
                 SpannableStringBuilder stringBuilder;
                 if (lastMessageObject.isVoice() || lastMessageObject.isRoundVideo()) {
                     isMusic = false;
@@ -2695,6 +2698,44 @@ public class FragmentContextView extends FrameLayout implements NotificationCent
 
     private final Paint progressPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
+    // StaticGram music player: the classic audio bar is tinted with the playing cover colors
+    private final Paint coverTintPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private int coverTintColorA, coverTintColorB, coverTintWidth;
+    private final Runnable coverColorsChanged = () -> {
+        if (currentStyle != STYLE_AUDIO_PLAYER) {
+            return;
+        }
+        invalidate();
+        if (frameLayout != null) {
+            frameLayout.invalidate();
+        }
+    };
+
+    private org.telegram.ui.music.MusicCoverColors coverColors() {
+        if (currentStyle == STYLE_AUDIO_PLAYER && miniPlayer == null && org.telegram.ui.music.MusicPlayerConfig.isCoverColorsMini()) {
+            return org.telegram.ui.music.MusicCoverColors.forTrack(MediaController.getInstance().getPlayingMessageObject());
+        }
+        return null;
+    }
+
+    private void drawCoverTint(Canvas canvas) {
+        final org.telegram.ui.music.MusicCoverColors colors = coverColors();
+        if (colors == null || frameLayout == null || frameLayout.getHeight() <= 0) {
+            return;
+        }
+        final int colorA = ColorUtils.setAlphaComponent(colors.accent, 82);
+        final int colorB = ColorUtils.setAlphaComponent(colors.middle, 48);
+        final int width = getMeasuredWidth();
+        if (colorA != coverTintColorA || colorB != coverTintColorB || width != coverTintWidth) {
+            coverTintColorA = colorA;
+            coverTintColorB = colorB;
+            coverTintWidth = width;
+            coverTintPaint.setShader(new LinearGradient(0, 0, width, 0, new int[] { colorA, colorB }, null, Shader.TileMode.CLAMP));
+        }
+        final float y = frameLayout.getTranslationY();
+        canvas.drawRect(frameLayout.getLeft(), frameLayout.getTop() + y, frameLayout.getRight(), frameLayout.getBottom() + y, coverTintPaint);
+    }
+
     public int getCurrentStyle() {
         return currentStyle;
     }
@@ -2721,6 +2762,9 @@ public class FragmentContextView extends FrameLayout implements NotificationCent
             }
             invalidate();
         }
+        if (currentStyle == STYLE_AUDIO_PLAYER) {
+            drawCoverTint(canvas);
+        }
         final int swipeSave = currentStyle == STYLE_AUDIO_PLAYER && miniPlayer != null ? miniPlayer.beginSwipeDraw(canvas) : -1; // exteraGram 13.1.1 player
         super.dispatchDraw(canvas);
 
@@ -2735,7 +2779,8 @@ public class FragmentContextView extends FrameLayout implements NotificationCent
                 final float bottom = getMeasuredHeight();
                 final float top = bottom - dpf2(2);
 
-                progressPaint.setColor(getThemedColor(Theme.key_telegram_color));
+                final org.telegram.ui.music.MusicCoverColors coverColors = coverColors();
+                progressPaint.setColor(coverColors != null ? coverColors.accent : getThemedColor(Theme.key_telegram_color));
                 canvas.drawRoundRect(left, top, p, bottom, dpf2(1), dpf2(1), progressPaint);
             }
         }

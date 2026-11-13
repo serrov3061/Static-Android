@@ -1529,7 +1529,9 @@ public class DownloadController extends BaseController implements NotificationCe
                 }
                 if (!contains) {
                     recentDownloadingFiles.add(0, parentObject);
-                    putToUnviewedDownloads(parentObject);
+                    if (!parentObject.sgAutoDownload) {
+                        putToUnviewedDownloads(parentObject);
+                    }
                 }
                 getNotificationCenter().postNotificationName(NotificationCenter.onDownloadingFilesChanged);
                 getMessagesStorage().getStorageQueue().postRunnable(() -> {

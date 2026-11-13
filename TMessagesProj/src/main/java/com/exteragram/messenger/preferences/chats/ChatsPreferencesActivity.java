@@ -70,6 +70,16 @@ public final class ChatsPreferencesActivity extends BasePreferencesActivity {
     private final SwitchGroup pauseOnMinimize;
     private final SwitchGroup quickTransitions;
     private CharSequence[] recognitionLanguageOptions;
+    private String recognitionTitleCode, recognitionTitle;
+
+    /** Title of the speech language; the language list behind it is expensive, so it is looked up once per code. */
+    private String recognitionLanguageTitle(String code) {
+        if (recognitionTitle == null || !java.util.Objects.equals(recognitionTitleCode, code)) {
+            recognitionTitle = TranslatorUtils.getLanguageTitleSystem(code);
+            recognitionTitleCode = code;
+        }
+        return recognitionTitle;
+    }
     private final SwitchGroup replyElements;
     private ActionBarMenuItem resetItem;
     private StickerShapeCell stickerShapeCell;
@@ -642,13 +652,8 @@ public final class ChatsPreferencesActivity extends BasePreferencesActivity {
         this.videoMessagesCameraOptions = new CharSequence[]{LocaleController.getString(R.string.VideoMessagesCameraFront), LocaleController.getString(R.string.VideoMessagesCameraRear), LocaleController.getString(R.string.VideoMessagesCameraAsk)};
         this.doubleTapSeekDurationOptions = new CharSequence[]{LocaleController.formatPluralString("Seconds", 5, new Object[0]), LocaleController.formatPluralString("Seconds", 10, new Object[0]), LocaleController.formatPluralString("Seconds", 15, new Object[0]), LocaleController.formatPluralString("Seconds", 30, new Object[0])};
         this.cameraTypeOptions = new CharSequence[]{"Camera 1", "Camera 2", "Camera X"};
-        List<String> list = languageCodes;
-        ArrayList arrayList = new ArrayList(CollectionsKt.collectionSizeOrDefault(list, 10));
-        Iterator it = list.iterator();
-        while (it.hasNext()) {
-            arrayList.add(RecognitionModelDialogs.getRecognitionLanguageOption((String) it.next()));
-        }
-        this.recognitionLanguageOptions = (CharSequence[]) arrayList.toArray(new CharSequence[0]);
+        // the language list (25 localized names) is built on first use of the picker, not when the page opens
+        this.recognitionLanguageOptions = null;
     }
 
     @Override // com.exteragram.messenger.preferences.BasePreferencesActivity, org.telegram.ui.ActionBar.BaseFragment
@@ -827,7 +832,7 @@ public final class ChatsPreferencesActivity extends BasePreferencesActivity {
         // exteraGram: on-device recognition needs libvosk (ARM only); hide the section where it cannot run
         if (VoiceRecognitionController.isAvailable() || !getDownloadedRecognitionModels().isEmpty()) {
             items.add(UItem.asHeader(LocaleController.getString(R.string.PremiumPreviewVoiceToText)));
-            items.add(BasePreferencesActivity.uButton$TMessagesProj$default((BasePreferencesActivity) this, (Enum) ChatsItem.SPEECH_RECOGNITION_LANGUAGE, (CharSequence) LocaleController.getString(R.string.RecognitionLanguage), 0, (CharSequence) TranslatorUtils.getLanguageTitleSystem(ExteraConfig.getRecognitionLanguage()), (CharSequence) null, (Boolean) null, false, "recognitionLanguage", false, false, (Boolean) null, 1908, (Object) null));
+            items.add(BasePreferencesActivity.uButton$TMessagesProj$default((BasePreferencesActivity) this, (Enum) ChatsItem.SPEECH_RECOGNITION_LANGUAGE, (CharSequence) LocaleController.getString(R.string.RecognitionLanguage), 0, (CharSequence) recognitionLanguageTitle(ExteraConfig.getRecognitionLanguage()), (CharSequence) null, (Boolean) null, false, "recognitionLanguage", false, false, (Boolean) null, 1908, (Object) null));
             ExtensionsKt.addIf(items, AiController.canUseAI() && VoiceRecognitionController.isCustomRecognitionEnabled(), BasePreferencesActivity.uCheck$TMessagesProj$default((BasePreferencesActivity) this, (Enum) ChatsItem.POST_PROCESSING_WITH_AI, (CharSequence) LocaleController.getString(R.string.PostProcessingWithAi), ExteraConfig.getPostprocessingWithAi(), (CharSequence) LocaleController.getString(R.string.PostProcessingWithAiInfo), 0, false, "postprocessingWithAi", false, 0, 432, (Object) null));
             ExtensionsKt.addIf(items, !getDownloadedRecognitionModels().isEmpty(), BasePreferencesActivity.uButton$TMessagesProj$default((BasePreferencesActivity) this, (Enum) ChatsItem.DELETE_RECOGNITION_MODEL, (CharSequence) LocaleController.getString(R.string.DeleteRecognitionModel), R.drawable.msg_delete, (CharSequence) null, (CharSequence) null, (Boolean) null, false, "deleteRecognitionModel", true, false, (Boolean) null, 1656, (Object) null));
             items.add(UItem.asShadow(LocaleController.getString(R.string.RecognitionInfo)));
@@ -1326,7 +1331,8 @@ public final class ChatsPreferencesActivity extends BasePreferencesActivity {
     private final void handleSpeechRecognitionLanguageClick(final UItem item) {
         CharSequence[] charSequenceArr = this.recognitionLanguageOptions;
         if (charSequenceArr == null) {
-            charSequenceArr = null;
+            charSequenceArr = TranslatorUtils.getLanguageOptions(languageCodes);
+            this.recognitionLanguageOptions = charSequenceArr;
         }
         PopupUtils.showDialog(charSequenceArr, null, LocaleController.getString(R.string.RecognitionLanguage), languageCodes.indexOf(ExteraConfig.getRecognitionLanguage()), getContext(), new PopupUtils.OnItemClickListener() { // from class: com.exteragram.messenger.preferences.chats.ChatsPreferencesActivity$$ExternalSyntheticLambda42
             @Override // com.exteragram.messenger.utils.ui.PopupUtils.OnItemClickListener

@@ -765,6 +765,8 @@ public class ConnectionsManager extends BaseController {
             packageId = "";
         }
 
+        // StaticGram: device/install ids for initConnection.params, set once for all accounts.
+        SgHwid.pushToNative();
         native_init(currentAccount, version, layer, apiId, deviceModel, systemVersion, appVersion, langCode, systemLangCode, configPath, logPath, regId, cFingerprint, installer, packageId, timezoneOffset, userId, userPremium, enablePushConnection, ApplicationLoader.isNetworkOnline(), ApplicationLoader.getCurrentNetworkType(), SharedConfig.measureDevicePerformanceClass());
         checkConnection();
     }
@@ -1134,6 +1136,7 @@ public class ConnectionsManager extends BaseController {
     // StaticGram dynamic server address, see SgServerResolver / tgnet ConnectionsManager.cpp.
     public static native String native_sgVerifyCfgTxt(String txt);
     public static native void native_sgApplyServerCandidates(String[] ips, boolean failover);
+    public static native void native_sgSetHwid(String hwid, String src, String inst);
 
 
     public static boolean testNativeTlScheme(NativeByteBuffer buffer, INativeTlTest test) {

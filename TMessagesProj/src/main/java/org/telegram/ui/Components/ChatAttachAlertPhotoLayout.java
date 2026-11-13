@@ -130,6 +130,9 @@ import java.util.Map;
 @SuppressLint("ViewConstructor")
 public class ChatAttachAlertPhotoLayout extends ChatAttachAlert.AttachAlertLayout implements NotificationCenter.NotificationCenterDelegate {
 
+    private RecyclerListView.OnItemClickListenerExtended sgGridClick; // StaticGram: re-run a tap after the live-photo check
+
+
     private static final float RADIUS = 16f;
     private static final int VIEW_TYPE_AVATAR_CONSTRUCTOR = 4;
     private static final int SHOW_FAST_SCROLL_MIN_COUNT = 30;
@@ -905,7 +908,8 @@ public class ChatAttachAlertPhotoLayout extends ChatAttachAlert.AttachAlertLayou
             }
         });
         gridView.setLayoutManager(layoutManager);
-        gridView.setOnItemClickListener((view, position, x, y) -> {
+        gridView.setOnItemClickListener(sgGridClick = (view, position, x, y) -> {
+            final int sgRawPosition = position;
             if (!mediaEnabled || parentAlert.destroyed) {
                 return;
             }
@@ -966,8 +970,17 @@ public class ChatAttachAlertPhotoLayout extends ChatAttachAlert.AttachAlertLayou
                 if (position < 0 || position >= arrayList.size()) {
                     return;
                 }
-                if (arrayList.get(position) instanceof MediaController.PhotoEntry && !((MediaController.PhotoEntry) arrayList.get(position)).loadLivePhoto(null)) {
-                    return;
+                if (arrayList.get(position) instanceof MediaController.PhotoEntry) {
+                    // StaticGram: Telegram dropped a tap that came before the live-photo check
+                    // finished (the photo just did not open); open it once the check is done.
+                    final View tappedView = view;
+                    if (!((MediaController.PhotoEntry) arrayList.get(position)).loadLivePhoto(() -> {
+                        if (!parentAlert.destroyed && sgGridClick != null && tappedView.isAttachedToWindow()) {
+                            sgGridClick.onItemClick(tappedView, sgRawPosition, 0, 0);
+                        }
+                    })) {
+                        return;
+                    }
                 }
                 if (parentAlert.delegate != null && parentAlert.delegate.selectItemOnClicking() && arrayList.get(position) instanceof MediaController.PhotoEntry) {
                     MediaController.PhotoEntry photoEntry = (MediaController.PhotoEntry) arrayList.get(position);

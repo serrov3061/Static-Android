@@ -195,6 +195,8 @@ public class FilterTabsView extends FrameLayout {
         // exteraGram: folder icon
         private android.graphics.drawable.Drawable icon;
         private String currentEmoticon;
+        private int iconFilterColor; // StaticGram (perf): the folder icon tint is rebuilt only when the colour changes
+        private boolean iconFilterSet;
         private Tab currentTab;
         private int textHeight;
         private int tabWidth;
@@ -409,6 +411,7 @@ public class FilterTabsView extends FrameLayout {
                     currentEmoticon = currentTab.emoticon;
                     icon = getResources().getDrawable(com.exteragram.messenger.utils.ui.FolderIcons.getTabIcon(currentTab.emoticon)).mutate();
                     icon.setBounds(0, 0, iconSize, iconSize);
+                    iconFilterSet = false;
                 }
                 float iconX = (getMeasuredWidth() - tabWidth) / 2f;
                 if (animateTextX) {
@@ -416,7 +419,12 @@ public class FilterTabsView extends FrameLayout {
                 }
                 canvas.save();
                 canvas.translate(iconX, (getMeasuredHeight() - iconSize) / 2f);
-                icon.setColorFilter(new PorterDuffColorFilter(textPaint.getColor(), PorterDuff.Mode.SRC_IN));
+                final int iconColor = textPaint.getColor();
+                if (!iconFilterSet || iconFilterColor != iconColor) {
+                    iconFilterSet = true;
+                    iconFilterColor = iconColor;
+                    icon.setColorFilter(new PorterDuffColorFilter(iconColor, PorterDuff.Mode.SRC_IN));
+                }
                 icon.setAlpha(textPaint.getAlpha());
                 icon.draw(canvas);
                 canvas.restore();

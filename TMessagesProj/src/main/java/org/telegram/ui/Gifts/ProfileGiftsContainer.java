@@ -457,16 +457,34 @@ public class ProfileGiftsContainer extends FrameLayout implements NotificationCe
             setVisibleHeight(visibleHeight);
         }
 
+        // StaticGram: in the profile the outer page often does the scrolling while this
+        // list stays put, so its own onScrolled never fired and only the first page of
+        // gifts was ever shown. Load the next page whenever the end of the list is on screen.
+        private final android.graphics.Rect sgVisibleRect = new android.graphics.Rect();
+        private final android.view.ViewTreeObserver.OnScrollChangedListener sgScrollChanged = this::sgCheckLoadMore;
+
+        private void sgCheckLoadMore() {
+            if (list == null || !isAttachedToWindow() || listView.getChildCount() == 0) {
+                return;
+            }
+            final View last = listView.getChildAt(listView.getChildCount() - 1);
+            if (isLoadingVisible() || !listView.canScrollVertically(1) || last != null && last.getGlobalVisibleRect(sgVisibleRect)) {
+                list.load();
+            }
+        }
+
         @Override
         protected void onAttachedToWindow() {
             super.onAttachedToWindow();
             NotificationCenter.getInstance(currentAccount).addWeakObserver(this, NotificationCenter.starUserGiftsLoaded);
+            getViewTreeObserver().addOnScrollChangedListener(sgScrollChanged);
         }
 
         @Override
         protected void onDetachedFromWindow() {
             super.onDetachedFromWindow();
             NotificationCenter.getInstance(currentAccount).removeObserver(this, NotificationCenter.starUserGiftsLoaded);
+            getViewTreeObserver().removeOnScrollChangedListener(sgScrollChanged);
         }
 
         @Override

@@ -61,6 +61,7 @@ public:
     void applyServerCandidates(std::vector<std::string> candidates, bool failover);
     static void sgApplyServerCandidates(std::vector<std::string> candidates, bool failover);
     static std::string sgVerifyCfgTxt(std::string txt);
+    static void sgSetHwid(std::string hwid, std::string src, std::string inst);
     void setDelegate(ConnectiosManagerDelegate *connectiosManagerDelegate);
     ConnectionState getConnectionState();
     void setUserId(int64_t userId);

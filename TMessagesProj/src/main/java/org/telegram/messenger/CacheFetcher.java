@@ -52,14 +52,27 @@ public abstract class CacheFetcher<Args, R> {
     private HashMap<Pair<Integer, Args>, R> cachedResults;
     private HashMap<Pair<Integer, Args>, ArrayList<Utilities.Callback<R>>> loadingCallbacks;
     private HashMap<Pair<Integer, Args>, Long> lastRequestedRemotely;
+    private HashMap<Pair<Integer, Args>, Long> loadingSince;
+    private static final long STALE_LOADING_MS = 30 * 1000;
 
     public void fetch(int currentAccount, Args arguments, Utilities.Callback<R> onResult) {
         final Pair<Integer, Args> key = new Pair<>(currentAccount, arguments);
 
         if (isLoading(key)) {
-            saveCallback(key, onResult);
-            return;
+            // StaticGram: a request whose answer never came (lost while the connection was
+            // being rebuilt) used to block this key forever: every later fetch only queued
+            // its callback, so e.g. help.getAppConfig was never asked again and a lifted
+            // account freeze stayed on screen. After STALE_LOADING_MS ask again.
+            final Long since = loadingSince != null ? loadingSince.get(key) : null;
+            if (since == null || System.currentTimeMillis() - since < STALE_LOADING_MS) {
+                saveCallback(key, onResult);
+                return;
+            }
         }
+        if (loadingSince == null) {
+            loadingSince = new HashMap<>();
+        }
+        loadingSince.put(key, System.currentTimeMillis());
 
         R cached = getCachedResult(key);
         if (cached != null && !shouldRequest(key)) {
@@ -184,6 +197,9 @@ public abstract class CacheFetcher<Args, R> {
 
             if (remove) {
                 loadingCallbacks.remove(key);
+                if (loadingSince != null) {
+                    loadingSince.remove(key);
+                }
             }
         });
     }

@@ -314,6 +314,37 @@ public abstract class TranslatorUtils {
         return TextUtils.isEmpty(normalized) ? "" : normalized.toUpperCase(Locale.US);
     }
 
+    /**
+     * "Title - own name" options for the codes with ONE language-list build
+     * (TranslateController.getLanguages() localizes and sorts the whole list on every call).
+     */
+    public static CharSequence[] getLanguageOptions(List<String> codes) {
+        final List<TranslateController.Language> languages = getLanguages();
+        final CharSequence[] result = new CharSequence[codes.size()];
+        for (int i = 0; i < result.length; i++) {
+            final String code = codes.get(i);
+            String title = null;
+            String own = null;
+            if ("none".equals(code)) {
+                title = LocaleController.getString(R.string.None);
+            } else {
+                for (TranslateController.Language language : languages) {
+                    if (TextUtils.equals(language.code, code)) {
+                        title = language.displayName;
+                        own = language.ownDisplayName;
+                        break;
+                    }
+                }
+                if (title == null) {
+                    final String normalized = normalizeLanguageCode(code);
+                    title = TextUtils.isEmpty(normalized) ? "" : normalized.toUpperCase(Locale.US);
+                }
+            }
+            result[i] = own == null ? title : title + " - " + own;
+        }
+        return result;
+    }
+
     public static String getLanguageDisplayName(String code) {
         for (TranslateController.Language language : getLanguages()) {
             if (TextUtils.equals(language.code, code)) {

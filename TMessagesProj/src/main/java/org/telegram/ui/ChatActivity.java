@@ -29159,6 +29159,7 @@ public class ChatActivity extends BaseFragment implements
     public void onBecomeFullyVisible() {
         isFullyVisible = true;
         super.onBecomeFullyVisible();
+        sgRestoreBackgroundAfterPullTransition();
         if (showCloseChatDialogLater) {
             showDialog(closeChatDialog);
         }
@@ -29394,6 +29395,9 @@ public class ChatActivity extends BaseFragment implements
     @Override
     public void onTransitionAnimationEnd(boolean isOpen, boolean backward) {
         super.onTransitionAnimationEnd(isOpen, backward);
+        if (isOpen) {
+            sgRestoreBackgroundAfterPullTransition();
+        }
         if (isOpen) {
             if (backward) {
                 if (showPinBulletin && pinBulletin != null) {
@@ -35436,7 +35440,14 @@ public class ChatActivity extends BaseFragment implements
             req.id = messageObject.getId();
             editingMessageObjectReqId = getConnectionsManager().sendRequest(req, (response, error) -> AndroidUtilities.runOnUIThread(() -> {
                 editingMessageObjectReqId = 0;
-                if (response == null) {
+                // StaticGram: getMessageEditData is only a pre-check. A lost answer or a
+                // transient error (timeout, reconnect, flood, 5xx) used to close the editor
+                // with "you can't edit this message" at random; only a definite refusal from
+                // the server does that now — editMessage itself is validated server-side.
+                if (response == null && error != null) {
+                    FileLog.e("getMessageEditData failed: " + error.code + " " + error.text);
+                }
+                if (response == null && error != null && sgIsHardEditRefusal(error)) {
                     if (getParentActivity() == null) {
                         return;
                     }
@@ -35455,6 +35466,18 @@ public class ChatActivity extends BaseFragment implements
         } else {
             chatActivityEnterView.showEditDoneProgress(false, true);
         }
+    }
+
+    // Errors that really mean the message can't be edited (not network trouble).
+    private static boolean sgIsHardEditRefusal(TLRPC.TL_error error) {
+        if (error == null || error.text == null || error.code != 400 && error.code != 403) {
+            return false;
+        }
+        final String t = error.text;
+        return t.startsWith("MESSAGE_ID_INVALID") || t.startsWith("MESSAGE_AUTHOR_REQUIRED")
+                || t.startsWith("MESSAGE_EDIT_TIME_EXPIRED") || t.startsWith("CHAT_ADMIN_REQUIRED")
+                || t.startsWith("CHAT_WRITE_FORBIDDEN") || t.startsWith("PEER_ID_INVALID")
+                || t.startsWith("CHANNEL_PRIVATE") || t.startsWith("CHANNEL_INVALID");
     }
 
     public void setupStickerVibrationAndSound(ChatMessageCell cell) {
@@ -45512,6 +45535,21 @@ public class ChatActivity extends BaseFragment implements
         return avatarContainer;
     }
 
+    // StaticGram: the pull-to-next-chat transition hides this chat's wallpaper until its
+    // animator ends. If that animator never ran to the end (cancelled, never started,
+    // fragment shown another way) the wallpaper stayed off for good and the chat list
+    // painted over stale frames. Once the chat is on screen, always turn it back on.
+    private void sgRestoreBackgroundAfterPullTransition() {
+        if (contentView == null || fragmentTransition != null && fragmentTransition.isStarted()) {
+            return;
+        }
+        contentView.setSkipBackgroundDrawing(false);
+        if (fragmentView != null && fragmentView.getAlpha() < 1f && toPullingDownTransition) {
+            fragmentView.setAlpha(1f);
+        }
+        toPullingDownTransition = false;
+    }
+
     public void openedInstantly() {
         fragmentOpened = true;
         fragmentBeginToShow = true;
@@ -45622,6 +45660,17 @@ public class ChatActivity extends BaseFragment implements
                         if (previousChat.topPanelLayout != null) {
                             previousChat.topPanelLayout.setAlpha(1f);
                         }
+                    }
+                });
+                fragmentTransition.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+                        // StaticGram: a cancelled pull-to-next-chat transition left the chat
+                        // with its wallpaper switched off (setSkipBackgroundDrawing(true)) and
+                        // the list then smeared old frames over the screen ("shake"/trails).
+                        contentView.setSkipBackgroundDrawing(false);
+                        fragmentView.setAlpha(1f);
+                        toPullingDownTransition = false;
                     }
                 });
                 fragmentTransition.setDuration(300);

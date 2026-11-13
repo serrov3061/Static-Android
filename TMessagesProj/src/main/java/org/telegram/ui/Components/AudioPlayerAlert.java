@@ -2871,6 +2871,13 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
             o.dismiss();
             onSubItemClick(7);
         });
+        if (messageObject.isMusic()) { // StaticGram: way back to the cover-colored player
+            o.addGap();
+            o.add(R.drawable.msg_media, getString(R.string.SgMusicNewPlayer), () -> {
+                o.dismiss();
+                org.telegram.ui.music.MusicPlayerAlert.switchFrom(this, parentActivity);
+            });
+        }
         o.setTranslationY(dp(64));
         o.show();
     }

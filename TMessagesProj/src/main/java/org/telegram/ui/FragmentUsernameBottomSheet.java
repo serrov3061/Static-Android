@@ -20,6 +20,7 @@ import android.widget.TextView;
 import org.telegram.PhoneFormat.PhoneFormat;
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.BillingController;
+import org.telegram.messenger.FileLog;
 import org.telegram.messenger.Emoji;
 import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.MessagesController;
@@ -46,6 +47,32 @@ public class FragmentUsernameBottomSheet {
 
     public static final int TYPE_USERNAME = 0;
     public static final int TYPE_PHONE = 1;
+
+    /** The crypto price ("TON 2555555"), or null when the server sent none usable. */
+    public static String formatCryptoPrice(TL_fragment.TL_collectibleInfo info) {
+        if (info == null || TextUtils.isEmpty(info.crypto_currency) || info.crypto_amount <= 0) {
+            return null;
+        }
+        return safeFormat(info.crypto_amount, info.crypto_currency);
+    }
+
+    /** The fiat price ("$554,555.00"), or null when there is none (zero, no currency, TON as fiat). */
+    public static String formatFiatPrice(TL_fragment.TL_collectibleInfo info) {
+        if (info == null || TextUtils.isEmpty(info.currency) || info.amount <= 0 || "TON".equalsIgnoreCase(info.currency)) {
+            return null;
+        }
+        return safeFormat(info.amount, info.currency);
+    }
+
+    private static String safeFormat(long amount, String currency) {
+        try {
+            return BillingController.getInstance().formatCurrency(amount, currency);
+        } catch (Exception e) {
+            // e.g. an unknown currency code
+            FileLog.e(e);
+            return null;
+        }
+    }
 
     public static void open(
         Context context,
@@ -89,19 +116,26 @@ public class FragmentUsernameBottomSheet {
             ownerName = "";
         }
 
-        final String money = BillingController.getInstance().formatCurrency(info.amount, info.currency);
-        final String crypto_money = BillingController.getInstance().formatCurrency(info.crypto_amount, info.crypto_currency);
+        // old collectibles may come without a usable price (currency=TON with no crypto currency, zero
+        // amounts): the sheet is shown without the price instead of failing on the formatting
+        final String money = formatFiatPrice(info);
+        final String crypto_money = formatCryptoPrice(info);
+        final String date = LocaleController.formatShortDateTime(info.purchase_date);
 
         String title;
         String message;
         String link;
         if (type == TYPE_USERNAME) {
             title = LocaleController.formatString(R.string.FragmentUsernameTitle, "@" + name);
-            message = LocaleController.formatString(R.string.FragmentUsernameMessage, LocaleController.formatShortDateTime(info.purchase_date), crypto_money, TextUtils.isEmpty(money) ? "" : "(" + money + ")");
+            message = crypto_money == null
+                ? LocaleController.formatString(R.string.SgFragmentUsernameMessageNoPrice, date)
+                : LocaleController.formatString(R.string.FragmentUsernameMessage, date, crypto_money, TextUtils.isEmpty(money) ? "" : "(" + money + ")");
             link = MessagesController.getInstance(UserConfig.selectedAccount).linkPrefix + "/" + name;
         } else if (type == TYPE_PHONE) {
             title = LocaleController.formatString(R.string.FragmentPhoneTitle, PhoneFormat.getInstance().format("+" + name));
-            message = LocaleController.formatString(R.string.FragmentPhoneMessage, LocaleController.formatShortDateTime(info.purchase_date), crypto_money, TextUtils.isEmpty(money) ? "" : "(" + money + ")");
+            message = crypto_money == null
+                ? LocaleController.formatString(R.string.SgFragmentPhoneMessageNoPrice, date)
+                : LocaleController.formatString(R.string.FragmentPhoneMessage, date, crypto_money, TextUtils.isEmpty(money) ? "" : "(" + money + ")");
             link = PhoneFormat.getInstance().format("+" + name);
         } else {
             return;

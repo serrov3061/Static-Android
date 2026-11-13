@@ -56,6 +56,8 @@ import androidx.media3.exoplayer.analytics.AnalyticsListener;
 import androidx.media3.common.AudioAttributes;
 import androidx.media3.exoplayer.audio.AudioSink;
 import androidx.media3.exoplayer.audio.DefaultAudioSink;
+import androidx.media3.exoplayer.audio.ForwardingAudioSink;
+import androidx.media3.common.MimeTypes;
 import androidx.media3.exoplayer.audio.TeeAudioProcessor;
 import androidx.media3.exoplayer.dash.DashMediaSource;
 import androidx.media3.exoplayer.hls.HlsMediaSource;
@@ -95,6 +97,7 @@ import org.telegram.messenger.Utilities;
 import org.telegram.messenger.chromecast.ChromecastMedia;
 import org.telegram.messenger.chromecast.ChromecastMediaVariations;
 import org.telegram.messenger.secretmedia.ExtendedDefaultDataSourceFactory;
+import org.telegram.messenger.ProfileMusicPulse;
 import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.Stories.recorder.StoryEntry;
 
@@ -185,6 +188,7 @@ public class VideoPlayer implements Player.Listener, VideoListener, AnalyticsLis
 
     private VideoPlayerDelegate delegate;
     private AudioVisualizerDelegate audioVisualizerDelegate;
+    private ProfileMusicPulse profileMusicPulse;
     private int lastReportedPlaybackState;
     private boolean lastReportedPlayWhenReady;
 
@@ -1819,6 +1823,11 @@ public class VideoPlayer implements Player.Listener, VideoListener, AnalyticsLis
         }
     }
 
+    /** Music player only: feeds the decoded audio into the beat detector of the profile gift bubbles. Call before preparing. */
+    public void enableProfileMusicPulse() {
+        profileMusicPulse = new ProfileMusicPulse();
+    }
+
     public void setAudioVisualizerDelegate(AudioVisualizerDelegate audioVisualizerDelegate) {
         this.audioVisualizerDelegate = audioVisualizerDelegate;
     }
@@ -2034,13 +2043,63 @@ public class VideoPlayer implements Player.Listener, VideoListener, AnalyticsLis
                 @NonNull Context context,
                 boolean enableFloatOutput,
                 boolean enableAudioTrackPlaybackParams) {
-            return new DefaultAudioSink.Builder(context)
+            final AudioSink sink = new DefaultAudioSink.Builder(context)
                     .setEnableFloatOutput(enableFloatOutput)
                     .setEnableAudioTrackPlaybackParams(enableAudioTrackPlaybackParams)
                     .setAudioProcessors(new AudioProcessor[]{
                             new TeeAudioProcessor(new VisualizerBufferSink())
                     })
                     .build();
+            final ProfileMusicPulse pulse = profileMusicPulse;
+            if (pulse == null) {
+                return sink;
+            }
+            return new ForwardingAudioSink(sink) {
+                private java.nio.ByteBuffer analyzed;
+
+                @Override
+                public void configure(Format inputFormat, int specifiedBufferSize, @Nullable int[] outputChannels) throws ConfigurationException {
+                    super.configure(inputFormat, specifiedBufferSize, outputChannels);
+                    analyzed = null;
+                    pulse.configure(inputFormat.sampleRate, inputFormat.channelCount, MimeTypes.AUDIO_RAW.equals(inputFormat.sampleMimeType) && inputFormat.pcmEncoding == C.ENCODING_PCM_16BIT);
+                }
+
+                @Override
+                public boolean handleBuffer(java.nio.ByteBuffer buffer, long presentationTimeUs, int encodedAccessUnitCount) throws InitializationException, WriteException {
+                    if (analyzed != buffer) {
+                        pulse.consume(buffer, presentationTimeUs);
+                        analyzed = buffer;
+                    }
+                    final boolean handled = super.handleBuffer(buffer, presentationTimeUs, encodedAccessUnitCount);
+                    if (handled) {
+                        analyzed = null;
+                    }
+                    return handled;
+                }
+
+                @Override
+                public long getCurrentPositionUs(boolean sourceEnded) {
+                    final long position = super.getCurrentPositionUs(sourceEnded);
+                    if (mixedPlayWhenReady && position != AudioSink.CURRENT_POSITION_NOT_SET) {
+                        pulse.advance(position);
+                    }
+                    return position;
+                }
+
+                @Override
+                public void handleDiscontinuity() {
+                    analyzed = null;
+                    pulse.clear();
+                    super.handleDiscontinuity();
+                }
+
+                @Override
+                public void flush() {
+                    analyzed = null;
+                    pulse.clear();
+                    super.flush();
+                }
+            };
         }
     }
 

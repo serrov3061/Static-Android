@@ -130,6 +130,27 @@ public final class SGCards {
         fragment.showDialog(sheet);
     }
 
+    /**
+     * "Send GRAM" from the upstream 13.1.1 wallet entry points (transaction sheet, profile menu,
+     * profile wallet card). StaticGram has no self-custody wallet engine (no local key,
+     * toncenter.performApiRequest is not served): its WalletSendEnterAmount shows the empty
+     * wallet.getState balance and a network fee that never loads. GRAM is sent off-chain from
+     * the «Деньги» balance (gramwallet.send / sendToAddress) instead.
+     */
+    public static void sendGram(BaseFragment fragment, TLRPC.User user, String address, String domain) {
+        if (fragment == null || fragment.getParentActivity() == null) return;
+        if (user != null) {
+            if (UserObject.isUserSelf(user) || user.bot || UserObject.isDeleted(user)) {
+                BulletinFactory.of(fragment).createErrorBulletin(getString(user.bot ? R.string.SgCardErrorBot : R.string.SgCardErrorRecipient)).show();
+                return;
+            }
+            SGSendMoneySheet.show(fragment, user, TL_sgcard.KIND_GRAM);
+            return;
+        }
+        final String target = !android.text.TextUtils.isEmpty(domain) && !"null".equals(domain) ? domain : address;
+        SGSendMoneySheet.showToAddress(fragment, target);
+    }
+
     /** Saves the rendered card and lets the user pick chats to send it to as a photo with the card link. */
     public static void shareCard(BaseFragment fragment, TLRPC.User owner, int kind, Bitmap image) {
         if (fragment == null || owner == null || image == null) {

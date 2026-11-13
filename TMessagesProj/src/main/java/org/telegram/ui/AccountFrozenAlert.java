@@ -50,7 +50,11 @@ public class AccountFrozenAlert {
             return false;
         }
         try {
-            final Matcher m = Pattern.compile("t\\.me/([a-zA-Z0-9]+)/?").matcher(MessagesController.getInstance(currentAccount).freezeAppealUrl);
+            // The appeal link is on our public link root (https://staticgram.top/SpamBot), not t.me:
+            // the appeal chat is the one whose username equals the link's last path component.
+            final String url = MessagesController.getInstance(currentAccount).freezeAppealUrl;
+            if (url == null) return false;
+            final Matcher m = Pattern.compile("/([a-zA-Z0-9_]+)/?(?:[?#].*)?$").matcher(url.trim());
             return m.find() && username.equalsIgnoreCase(m.group(1));
         } catch (Exception e) {
             FileLog.e(e);

@@ -3142,7 +3142,7 @@ public class WalletActivity extends UniversalFragment implements NotificationCen
                         sheet[0].setOnDismissListener(dialog -> {
                             final BaseFragment lastFragment = LaunchActivity.getSafeLastFragment();
                             if (lastFragment == null) return;
-                            lastFragment.presentFragment(new WalletSendEnterAmount(user));
+                            SGCards.sendGram(lastFragment, user, null, null);
                         });
                         sheet[0].dismiss();
                     });
@@ -3152,7 +3152,7 @@ public class WalletActivity extends UniversalFragment implements NotificationCen
                         sheet[0].setOnDismissListener(dialog -> {
                             final BaseFragment lastFragment = LaunchActivity.getSafeLastFragment();
                             if (lastFragment == null) return;
-                            lastFragment.presentFragment(user != null ? new WalletSendEnterAmount(user) : new WalletSendEnterAmount(peer.address).setRecipientDomain(peer.domain));
+                            SGCards.sendGram(lastFragment, user, peer.address, peer.domain);
                         });
                         sheet[0].dismiss();
                     });
@@ -3176,7 +3176,7 @@ public class WalletActivity extends UniversalFragment implements NotificationCen
                         sheet[0].setOnDismissListener(dialog -> {
                             final BaseFragment lastFragment = LaunchActivity.getSafeLastFragment();
                             if (lastFragment == null) return;
-                            lastFragment.presentFragment(new WalletSendEnterAmount(peer.address).setRecipientDomain(peer.domain));
+                            SGCards.sendGram(lastFragment, null, peer.address, peer.domain);
                         });
                         sheet[0].dismiss();
                     });
@@ -3189,14 +3189,14 @@ public class WalletActivity extends UniversalFragment implements NotificationCen
                             sheet[0].setOnDismissListener(dialog -> {
                                 final BaseFragment lastFragment = LaunchActivity.getSafeLastFragment();
                                 if (lastFragment == null) return;
-                                lastFragment.presentFragment(new WalletSendEnterAmount(peer.address).setRecipientDomain(peer.domain));
+                                SGCards.sendGram(lastFragment, null, peer.address, peer.domain);
                             });
                             sheet[0].dismiss();
                         }, LocaleController.getString(R.string.WalletSend), onSend != null ? null : () -> {
                             sheet[0].setOnDismissListener(dialog -> {
                                 final BaseFragment lastFragment = LaunchActivity.getSafeLastFragment();
                                 if (lastFragment == null) return;
-                                lastFragment.presentFragment(new WalletSendEnterAmount(peer.address).setRecipientDomain(peer.domain));
+                                SGCards.sendGram(lastFragment, null, peer.address, peer.domain);
                             });
                             sheet[0].dismiss();
                         });
@@ -3219,7 +3219,7 @@ public class WalletActivity extends UniversalFragment implements NotificationCen
                     sheet[0].setOnDismissListener(dialog -> {
                         final BaseFragment lastFragment = LaunchActivity.getSafeLastFragment();
                         if (lastFragment == null) return;
-                        lastFragment.presentFragment(new WalletSendEnterAmount(peer.address));
+                        SGCards.sendGram(lastFragment, null, peer.address, null);
                     });
                     sheet[0].dismiss();
                 });

@@ -2233,6 +2233,31 @@ static std::string sgGetResolvedServerIp() {
     return ip;
 }
 
+// StaticGram: process-wide device/install ids (moderation: link multi-accounts,
+// ban devices). Set once from Java (SgHwid.java) before the first native init;
+// hwid is a salted SHA-256, the raw ANDROID_ID never reaches native code.
+static pthread_mutex_t sgHwidMutex = PTHREAD_MUTEX_INITIALIZER;
+static std::string sgHwid;
+static std::string sgHwidSrc;
+static std::string sgInst;
+
+void ConnectionsManager::sgSetHwid(std::string hwid, std::string src, std::string inst) {
+    pthread_mutex_lock(&sgHwidMutex);
+    sgHwid = hwid;
+    sgHwidSrc = src;
+    sgInst = inst;
+    pthread_mutex_unlock(&sgHwidMutex);
+}
+
+static void sgAddJsonString(TL_jsonObject *jsonObject, const char *key, const std::string &value) {
+    auto objectValue = new TL_jsonObjectValue();
+    jsonObject->value.push_back(std::unique_ptr<TL_jsonObjectValue>(objectValue));
+    auto jsonString = new TL_jsonString();
+    jsonString->value = value;
+    objectValue->key = key;
+    objectValue->value = std::unique_ptr<JSONValue>(jsonString);
+}
+
 std::string ConnectionsManager::sgVerifyCfgTxt(std::string txt) {
     std::string ip = verifyShuzaGramAttestation(txt);
     if (!ip.empty() && !sgIsPublicIpv4(ip)) {
@@ -3787,6 +3812,26 @@ std::unique_ptr<TLObject> ConnectionsManager::wrapInLayer(TLObject *object, Data
                 jsonNumber->value = currentPerformanceClass + 1;
                 objectValue->key = "perf_cat";
                 objectValue->value = std::unique_ptr<JSONValue>(jsonNumber);
+            }
+
+            // StaticGram: sg_hwid / sg_hwid_src / sg_hwid_v / sg_inst (see sgSetHwid).
+            pthread_mutex_lock(&sgHwidMutex);
+            std::string hwid = sgHwid;
+            std::string hwidSrc = sgHwidSrc;
+            std::string inst = sgInst;
+            pthread_mutex_unlock(&sgHwidMutex);
+            if (!hwid.empty()) {
+                sgAddJsonString(jsonObject, "sg_hwid", hwid);
+                sgAddJsonString(jsonObject, "sg_hwid_src", hwidSrc);
+                objectValue = new TL_jsonObjectValue();
+                jsonObject->value.push_back(std::unique_ptr<TL_jsonObjectValue>(objectValue));
+                auto hwidVersion = new TL_jsonNumber();
+                hwidVersion->value = 1;
+                objectValue->key = "sg_hwid_v";
+                objectValue->value = std::unique_ptr<JSONValue>(hwidVersion);
+            }
+            if (!inst.empty()) {
+                sgAddJsonString(jsonObject, "sg_inst", inst);
             }
 
             request->flags |= 2;

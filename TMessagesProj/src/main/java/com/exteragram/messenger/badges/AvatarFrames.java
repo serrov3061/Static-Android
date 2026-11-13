@@ -177,7 +177,7 @@ public final class AvatarFrames {
         int side = (int) Math.ceil(box * viewScale(parent) / 8f) * 8;
         side = Math.max(16, Math.min(MAX_SIDE, side));
         final boolean light = !Theme.isCurrentThemeDark();
-        final String key = params.key() + "|" + side + (light ? "|l" : "|d");
+        final String key = params.sizedKey(side, light);
         long t0 = System.nanoTime();
         FrameRenderer.Layers layers = cache.get(key);
         if (layers == null) {

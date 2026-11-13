@@ -42,6 +42,7 @@ import android.content.res.Configuration;
 import android.database.DataSetObserver;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.RecordingCanvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Matrix;
@@ -1184,6 +1185,9 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
          * StaticGram avatar frame. Drawn by the parent container (after this view), because this view
          * has a hardware layer of its own bounds that would clip the frame to a square.
          */
+        public int frameBackdropColor;
+        private android.graphics.Paint frameBackdropPaint;
+
         public void drawFrameOverflow(Canvas canvas) {
             if (frameDialogId <= 0 || hasStories || !drawAvatar) {
                 return;
@@ -1207,6 +1211,23 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 // the frame is placed by the receiver coords; set them to this view (no stories, no inset) so a
                 // frame drawn before the avatar redraws (e.g. right after the photo changed) is not stale
                 receiver.setImageCoords(0, 0, getMeasuredWidth(), getMeasuredHeight());
+                if (frameBackdropColor != 0) {
+                    // StaticGram: over a profile banner the frame (dark nebula/metal tones) melted into the
+                    // picture; a soft disc of the header colour behind it gives it the same backing as without one
+                    final float cx = getMeasuredWidth() / 2f, cy = getMeasuredHeight() / 2f;
+                    final float r = Math.min(cx, cy), outer = r * 1.42f;
+                    if (frameBackdropPaint == null) {
+                        frameBackdropPaint = new android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG);
+                    }
+                    // a ring only: the inside stays clear, the backdrop was drawn after the photo and hid it
+                    final int solid = ColorUtils.setAlphaComponent(frameBackdropColor, (int) (230 * frameAlpha));
+                    final int clear = ColorUtils.setAlphaComponent(frameBackdropColor, 0);
+                    final float in = Math.max(0f, (r - 1) / outer);
+                    frameBackdropPaint.setShader(new android.graphics.RadialGradient(cx, cy, outer,
+                            new int[]{clear, clear, solid, solid, clear},
+                            new float[]{0f, in, Math.min(0.99f, in + 0.01f), 0.82f, 1f}, android.graphics.Shader.TileMode.CLAMP));
+                    canvas.drawCircle(cx, cy, outer, frameBackdropPaint);
+                }
                 com.exteragram.messenger.badges.AvatarFrames.drawFor(frameDialogId, canvas, receiver, frameAlpha, true, (View) getParent());
                 canvas.restore();
             }
@@ -1307,6 +1328,10 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         }
         sgBannerId = id;
         sgBannerVideo = video;
+        if (avatarImage != null) {
+            avatarImage.frameBackdropColor = id != null ? Theme.getColor(Theme.key_actionBarDefault, resourceProvider) : 0;
+            avatarImage.invalidate();
+        }
         if (id == null) {
             if (topView != null) {
                 topView.invalidate();
@@ -2982,7 +3007,8 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 } else if (id == gift_premium) {
                     onGiftPermiumClicked();
                 } else if (id == send_money) {
-                    presentFragment(new WalletSendEnterAmount(getMessagesController().getUser(userId)).setAllowOpenChat());
+                    // StaticGram: off-chain «Деньги» send, not the self-custody wallet screen
+                    org.telegram.ui.Wallet.SGCards.sendGram(ProfileActivity.this, getMessagesController().getUser(userId), null, null);
                 } else if (id == channel_stories) {
                     Bundle args = new Bundle();
                     args.putInt("type", MediaActivity.TYPE_ARCHIVED_CHANNEL_STORIES);
@@ -5448,9 +5474,53 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         avatarContainer2 = new FrameLayout(context) {
 
             CanvasButton canvasButton;
+            private boolean giftGlassDirty = true;
+            private int giftGlassChildrenHash;
+
+            @Override
+            public void onDescendantInvalidated(@NonNull View child, @NonNull View target) {
+                super.onDescendantInvalidated(child, target);
+                if (child != giftsView) {
+                    giftGlassDirty = true;
+                }
+            }
+
+            @Override
+            public void invalidate() {
+                super.invalidate();
+                giftGlassDirty = true;
+            }
 
             @Override
             protected void dispatchDraw(Canvas canvas) {
+                if (giftsView != null && getWidth() > 0 && getHeight() > 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    // the gift bubbles refract the header: record everything under them into their glass source,
+                    // again only when something but the bubbles changed (the orbit alone redraws every frame)
+                    final GlassSourceRenderNode giftGlassSource = giftsView.getGiftGlassSource(canvas);
+                    int childrenHash = getChildCount();
+                    for (int i = 0; i < getChildCount(); ++i) {
+                        childrenHash = childrenHash * 31 + (getChildAt(i).getVisibility() == View.VISIBLE ? 1 : 0);
+                    }
+                    if (childrenHash != giftGlassChildrenHash) {
+                        giftGlassChildrenHash = childrenHash;
+                        giftGlassDirty = true;
+                    }
+                    if (giftGlassSource != null && !giftGlassSource.inRecording() && (giftGlassDirty || giftGlassSource.needUpdateDisplayList(getWidth(), getHeight()))) {
+                        giftGlassDirty = false;
+                        final RecordingCanvas recordingCanvas = giftGlassSource.beginRecording(getWidth(), getHeight());
+                        try {
+                            recordingCanvas.drawColor(getThemedColor(Theme.key_actionBarDefault));
+                            for (int i = 0; i < getChildCount(); ++i) {
+                                final View child = getChildAt(i);
+                                if (child != giftsView && child.getVisibility() == View.VISIBLE) {
+                                    drawChild(recordingCanvas, child, getDrawingTime());
+                                }
+                            }
+                        } finally {
+                            giftGlassSource.endRecording();
+                        }
+                    }
+                }
                 super.dispatchDraw(canvas);
                 if (transitionOnlineText != null) {
                     canvas.save();
@@ -5881,7 +5951,9 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         }
         avatarContainer2.addView(storyView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
         giftsView = new ProfileGiftsView(context, currentAccount, getDialogId(), avatarContainer, avatarImage, resourcesProvider);
-        avatarContainer2.addView(giftsView, 0, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
+        // glow/backdrop under the avatar, bubbles above it (the far half of the orbit is clipped out by the avatar)
+        avatarContainer2.addView(giftsView.getAmbientView(), 0, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
+        avatarContainer2.addView(giftsView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
         updateProfileData(true);
 
         writeButton = new RLottieImageView(context);
@@ -7835,8 +7907,9 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                             }
                             final String usernameStr = "@" + usernameObj.username;
                             final String date = LocaleController.getInstance().getFormatterBoostExpired().format(new Date(info.purchase_date * 1000L));
-                            final String cryptoAmount = BillingController.getInstance().formatCurrency(info.crypto_amount, info.crypto_currency);
-                            final String amount = BillingController.getInstance().formatCurrency(info.amount, info.currency);
+                            final String cryptoAmount = FragmentUsernameBottomSheet.formatCryptoPrice(info);
+                            final String amount = FragmentUsernameBottomSheet.formatFiatPrice(info);
+                            if (cryptoAmount == null) return; // no price known for an old collectible: no bulletin
                             BulletinFactory.of(shareAlert.bulletinContainer2, resourcesProvider)
                                     .createImageBulletin(
                                             R.drawable.filled_username,
@@ -7857,6 +7930,12 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                     getConnectionsManager().bindRequestToGuid(reqId, getClassGuid());
                 }
             } else {
+                // a tap on a collectible username opens its Fragment sheet, as in Telegram (own profile too);
+                // long-press keeps the Copy / Copy link / Learn more menu
+                if (!isLongPress && position == usernameRow && usernameObj != null && !usernameObj.editable) {
+                    openCollectibleUsernameInfo(usernameObj.username);
+                    return true;
+                }
                 if (editRow(view, position)) return true;
 
                 // StaticGram: a collectible (NFT) username used to open only the Fragment
@@ -7882,9 +7961,13 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         } else if (position == noteRow) {
 
         } else if (position == phoneRow || position == numberRow) {
-            if (editRow(view, position)) return true;
-
             final TLRPC.User user = getMessagesController().getUser(userId);
+            // an anonymous (Fragment) number opens its sheet on tap, in the own profile too (it was
+            // caught by the own-profile edit menu first and never asked the server)
+            final boolean anonymousNumber = position == phoneRow && user != null && user.phone != null && user.phone.startsWith("888") && getParentActivity() != null
+                && !(com.exteragram.messenger.ExteraConfig.getHidePhoneNumber() && user.id == getUserConfig().getClientUserId());
+            if (!anonymousNumber && editRow(view, position)) return true;
+
             if (user == null || user.phone == null || user.phone.length() == 0 || getParentActivity() == null) {
                 return false;
             }
@@ -7892,7 +7975,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 return false;
             }
 
-            if (position == phoneRow && user.phone.startsWith("888")) {
+            if (anonymousNumber) {
                 final TL_fragment.TL_inputCollectiblePhone input = new TL_fragment.TL_inputCollectiblePhone();
                 final String phone = input.phone = user.phone;
                 final TL_fragment.TL_getCollectibleInfo req = new TL_fragment.TL_getCollectibleInfo();
@@ -7903,6 +7986,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                     } else {
                         // StaticGram: not a collectible on the server (e.g. COLLECTIBLE_NOT_FOUND) -> regular phone options
                         if (getParentActivity() == null || isFinishing() || view == null || !view.isAttachedToWindow()) return;
+                        if (editRow(view, position)) return;
                         showPhoneOptions(view, position, user);
                     }
                 }));
@@ -10646,6 +10730,29 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
 
     private AboutLinkCell aboutLinkCell;
 
+    private boolean sgFadeLongName;
+
+    // StaticGram: true when the previous screen is a chat whose header title is cut off
+    private boolean sgNameTruncatedInChatHeader() {
+        try {
+            if (parentLayout == null || parentLayout.getFragmentStack().size() < 2) {
+                return false;
+            }
+            BaseFragment prev = parentLayout.getFragmentStack().get(parentLayout.getFragmentStack().size() - 2);
+            if (!(prev instanceof ChatActivity) || ((ChatActivity) prev).getAvatarContainer() == null) {
+                return false;
+            }
+            SimpleTextView title = ((ChatActivity) prev).getAvatarContainer().getTitleTextView();
+            if (title == null || title.getText() == null || title.getWidth() <= 0) {
+                return false;
+            }
+            float full = title.getPaint().measureText(title.getText().toString());
+            return full > title.getWidth() - title.getPaddingLeft() - title.getPaddingRight() - dp(28);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     @Keep
     public void setAvatarAnimationProgress(float progress) {
         avatarAnimationProgress = currentExpandAnimatorValue = progress;
@@ -10694,6 +10801,11 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         int titleColor = /*peerColor != null ? Color.WHITE :*/ getThemedColor(Theme.key_actionBarDefaultTitle);
         if (nameTextView != null && playProfileAnimation != 2) {
             nameTextView.setTextColor(ColorUtils.blendARGB(titleColor, color, progress));
+            if (sgFadeLongName) {
+                // a name cut off in the chat header does not fly across the screen at full
+                // length: it fades out in the header half and fades in at its profile place
+                nameTextView.setAlpha(progress <= 0.5f ? 0f : (progress - 0.5f) * 2f);
+            }
         }
 
         color = isOnline[0] ? getThemedColor(Theme.key_profile_status) : AvatarDrawable.getProfileTextColorForId(userId != 0 || ChatObject.isChannel(chatId, currentAccount) && !currentChat.megagroup ? 5 : chatId, resourcesProvider);
@@ -10754,6 +10866,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         if (!(playProfileAnimation != 0 && allowProfileAnimation && !isPulledDown && !disableProfileAnimation)) {
             return null;
         }
+        sgFadeLongName = sgNameTruncatedInChatHeader();
 
         if (communityItem != null) {
             communityItem.setAlpha(1f);
@@ -12117,11 +12230,18 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
             actionsView.clipHeight = avatarContainer.getY() + vh;
             actionsView.setAlpha(avatarAnimationProgress);
             actionsView.updatePosition(listView.getMeasuredWidth(), com.exteragram.messenger.utils.ui.ProfileActionsUiHelper.getBandHeight());
+            if (giftsView != null) {
+                giftsView.setContentBottom(-1);
+            }
         } else {
             actionsView.clipHeight = -1;
             float bottom = extraHeight + newTop - dp(hasMusic || hasBalance ? 25 : 0);
             float height = Math.min(com.exteragram.messenger.utils.ui.ProfileActionsUiHelper.getBandHeight(), bottom - newTop);
             actionsView.updatePosition(bottom - height, height);
+            if (giftsView != null) {
+                // the gift bubbles stay above the buttons
+                giftsView.setContentBottom(actionsView.getVisibility() == View.VISIBLE ? bottom - height : -1);
+            }
         }
 
         if (callToActionItem != null && callToActionItem.getTag() != null) {
@@ -15088,6 +15208,13 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
             span = new UsernameLinkSpan() {
                 @Override
                 public void onClick(@NonNull View view) {
+                    if (!usernameObj.editable) {
+                        // a collectible username opens its Fragment sheet (as in Telegram)
+                        if (loadingSpan == this) return;
+                        setLoadingSpan(this);
+                        openCollectibleUsernameInfo(usernameRaw, () -> setLoadingSpan(null));
+                        return;
+                    }
                     setLoadingSpan(null);
                     if (currentChat != null && currentChat.noforwards) {
                         return;
@@ -16336,11 +16463,16 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
     }
 
     private void openCollectibleUsernameInfo(String username) {
+        openCollectibleUsernameInfo(username, null);
+    }
+
+    private void openCollectibleUsernameInfo(String username, Runnable done) {
         final TL_fragment.TL_getCollectibleInfo req = new TL_fragment.TL_getCollectibleInfo();
         final TL_fragment.TL_inputCollectibleUsername input = new TL_fragment.TL_inputCollectibleUsername();
         input.username = username;
         req.collectible = input;
         int reqId = getConnectionsManager().sendRequest(req, (res, err) -> AndroidUtilities.runOnUIThread(() -> {
+            if (done != null) done.run();
             if (getContext() == null) return;
             if (res instanceof TL_fragment.TL_collectibleInfo) {
                 TLObject obj = userId != 0 ? getMessagesController().getUser(userId) : getMessagesController().getChat(chatId);

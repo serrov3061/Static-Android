@@ -46,8 +46,14 @@ public class SGSendMoneySheet extends BottomSheet {
 
     /** «На адрес»: GRAM to a wallet address or name.ton, no recipient chat. */
     public static void showToAddress(BaseFragment fragment) {
+        showToAddress(fragment, null);
+    }
+
+    /** «На адрес» with the address (or name.ton) already filled in. */
+    public static void showToAddress(BaseFragment fragment, String address) {
         if (fragment == null || fragment.getParentActivity() == null) return;
         final SGSendMoneySheet sheet = new SGSendMoneySheet(fragment, null, TL_sgcard.KIND_GRAM);
+        sheet.form.setAddress(address);
         if (fragment.showDialog(sheet) == null) {
             sheet.show();
         }
@@ -85,7 +91,10 @@ public class SGSendMoneySheet extends BottomSheet {
         });
         bulletinContainer.addView(form, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, android.view.Gravity.TOP, 0, 12, 0, 0));
         setCustomView(bulletinContainer);
-        AndroidUtilities.runOnUIThread(user == null ? form::requestAddressKeyboard : form::requestAmountKeyboard, 300);
+        AndroidUtilities.runOnUIThread(() -> {
+            if (user == null && !form.hasAddressText()) form.requestAddressKeyboard();
+            else form.requestAmountKeyboard();
+        }, 300);
     }
 
     private boolean isRecipientChat(BaseFragment f) {

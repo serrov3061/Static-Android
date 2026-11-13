@@ -262,6 +262,24 @@ public final class FrameParams {
         return key;
     }
 
+    // StaticGram (perf): the last bitmap-cache key with size and theme, so drawing a frame (up to 30 fps
+    // in several list cells) does not build a new String on every draw. Used on the UI thread only.
+    private String sizedKey;
+    private int sizedSide;
+    private boolean sizedLight;
+
+    /** {@link #key()} plus the bitmap side and theme: the key of the AvatarFrames layer cache. */
+    String sizedKey(int side, boolean light) {
+        String k = sizedKey;
+        if (k == null || sizedSide != side || sizedLight != light) {
+            k = key + "|" + side + (light ? "|l" : "|d");
+            sizedKey = k;
+            sizedSide = side;
+            sizedLight = light;
+        }
+        return k;
+    }
+
     public String paletteName() {
         return paletteValues(style)[palette];
     }

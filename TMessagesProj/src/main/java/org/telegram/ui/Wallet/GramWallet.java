@@ -2253,18 +2253,34 @@ public class GramWallet implements GramWalletStreaming.IGramWalletStreamingSubsc
             whenDone.run(transactionsCache.get(id));
             return;
         }
+        // StaticGram (perf): the server may not implement wallet.getTransactionsByIDs; it answers with
+        // a server error, which tgnet by default resends forever (every ~10 s, even after the sheet that
+        // asked is closed: 1300+ requests in core logs). Fail on server errors instead and do not ask
+        // again for the same id for a while; the sheet just keeps showing the preview transaction.
+        final Long failedAt = transactionsFailedAt.get(id);
+        if (failedAt != null && android.os.SystemClock.elapsedRealtime() - failedAt < TRANSACTION_RETRY_MS) {
+            whenDone.run(null);
+            return;
+        }
         final TL_wallet.getTransactionsByIDs request = new TL_wallet.getTransactionsByIDs();
         request.id.add(id);
         getConnectionsManager().sendRequestTyped(request, AndroidUtilities::runOnUIThread, (transactions, error) -> {
             if (transactions == null || transactions.transactions.isEmpty()) {
+                if (error != null) {
+                    transactionsFailedAt.put(id, android.os.SystemClock.elapsedRealtime());
+                }
                 whenDone.run(null);
                 return;
             }
+            transactionsFailedAt.remove(id);
             final TL_wallet.walletTransaction transaction = transactions.transactions.get(0);
             transactionsCache.put(id, transaction);
             whenDone.run(transaction);
-        });
+        }, ConnectionsManager.RequestFlagFailOnServerErrors);
     }
+
+    private static final long TRANSACTION_RETRY_MS = 10 * 60 * 1000L;
+    private final HashMap<String, Long> transactionsFailedAt = new HashMap<>();
 
     private final HashMap<Long, TL_wallet.walletUserAddress> cachedWalletResolvesByUser = new HashMap<>();
     private final HashMap<String, TL_wallet.walletUserAddress> cachedWalletResolvesByAddress = new HashMap<>();

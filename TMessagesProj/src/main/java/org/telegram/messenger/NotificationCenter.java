@@ -707,7 +707,9 @@ public class NotificationCenter {
         if (objects != null && !objects.isEmpty()) {
             for (int a = 0; a < objects.size(); a++) {
                 NotificationCenterDelegate obj = objects.get(a);
-                obj.didReceivedNotification(id, currentAccount, args);
+                if (!dispatchSafely(obj, id, currentAccount, args)) {
+                    removeObserver(obj, id);
+                }
             }
         }
         broadcasting--;
@@ -818,7 +820,7 @@ public class NotificationCenter {
         public void didReceivedNotification(int id, int account, Object... args) {
             final NotificationCenterDelegate delegate = reference.get();
             if (delegate != null) {
-                delegate.didReceivedNotification(id, account, args);
+                dispatchSafely(delegate, id, account, args);
             } else {
                 FileLog.e("MEMORY_LEAK observer " + id + " with destroyed WeakReference");
                 removeAllObservers();
@@ -841,6 +843,26 @@ public class NotificationCenter {
         }
     }
 
+
+    /**
+     * Plugin observers (Python/Java dynamic proxies) must never crash the client:
+     * an exception thrown by such an observer is logged and the observer is dropped for this id.
+     * Regular observers are called directly so their bugs still surface.
+     * @return false when the observer failed and should be removed
+     */
+    private static boolean dispatchSafely(NotificationCenterDelegate delegate, int id, int account, Object[] args) {
+        if (!java.lang.reflect.Proxy.isProxyClass(delegate.getClass())) {
+            delegate.didReceivedNotification(id, account, args);
+            return true;
+        }
+        try {
+            delegate.didReceivedNotification(id, account, args);
+            return true;
+        } catch (Throwable e) {
+            FileLog.e("plugin observer failed on notification " + id + ", removed", e);
+            return false;
+        }
+    }
 
     public ObserversGroup createObserversGroup(NotificationCenterDelegate delegate) {
         return new ObserversGroupImpl(this, delegate);
@@ -885,7 +907,9 @@ public class NotificationCenter {
         public void didReceivedNotification(int id, int account, Object... args) {
             final NotificationCenterDelegate delegate = reference.get();
             if (delegate != null) {
-                delegate.didReceivedNotification(id, account, args);
+                if (!dispatchSafely(delegate, id, account, args)) {
+                    center.removeObserverInternal(this, id);
+                }
             } else {
                 center.removeObserverInternal(this, id);
             }

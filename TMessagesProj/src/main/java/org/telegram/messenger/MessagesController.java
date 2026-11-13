@@ -2745,6 +2745,8 @@ public class MessagesController extends BaseController implements NotificationCe
 
     public void loadAppConfig(boolean force) {
         AndroidUtilities.cancelRunOnUIThread(loadAppConfigRunnable);
+        // StaticGram: keep the periodic refresh alive even if this fetch never answers.
+        AndroidUtilities.runOnUIThread(loadAppConfigRunnable, 4 * 60 * 1000 + 10);
         if (force) {
             appConfigFetcher.forceRequest(currentAccount, 0);
         }
